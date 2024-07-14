@@ -30,8 +30,9 @@ import { diskStorage } from 'multer';
 import * as path from 'path';
 config();
 
-const clientId = '152404122949-28cgi4vta9vreupt8m4armb4h0l886ck.apps.googleusercontent.com';
-const clientSecret = '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';
+const clientId = process.env.GOOGLE_CLIENT_ID;
+const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+
 
 const client = new OAuth2Client(clientId, clientSecret);
 

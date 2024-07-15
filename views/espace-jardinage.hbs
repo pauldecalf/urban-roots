@@ -159,75 +159,66 @@ PAGE / espace-jardinage avec la map dynamique  --}}
         <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
         <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
   
-        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-        <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', (event) => {
-            const map = L.map('map').setView([48.8566, 2.3522], 6);
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+        const map = L.map('map').setView([48.8566, 2.3522], 6);
 
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors'
-            }).addTo(map);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
 
-            // Insérer les données des jardins dans le script en tant que chaîne JSON
-            const jardinsData = `{{{jardins}}}`;  // Utilisation des triples accolades pour éviter l'échappement
-            const jardins = JSON.parse(jardinsData);  // Utilisation de JSON.parse pour convertir la chaîne en objet
+        // Insérer les données des jardins dans le script en tant que chaîne JSON
+        const jardinsData = `{{{jardins}}}`;  // Utilisation des triples accolades pour éviter l'échappement
+        const jardins = JSON.parse(jardinsData);  // Utilisation de JSON.parse pour convertir la chaîne en objet
 
-            // Créer un groupe de clusters
-            const markers = L.markerClusterGroup();
+        // Créer un groupe de clusters
+        const markers = L.markerClusterGroup();
 
-            jardins.forEach(jardin => {
-                // Vérifiez que lat et lng sont définis avant de créer le marqueur
-                if (typeof jardin.latitude === 'number' && typeof jardin.longitude === 'number') {
+        jardins.forEach(jardin => {
+            // Vérifiez que lat et lng sont définis avant de créer le marqueur
+            if (typeof jardin.latitude === 'number' && typeof jardin.longitude === 'number') {
+            const marker = L.marker([jardin.latitude, jardin.longitude])
+                .bindPopup(`
+                <b>${jardin.nom}</b><br>
+                ${jardin.adresse}, ${jardin.codePostal} ${jardin.ville}<br>
+                <a href="${jardin.siteWeb}" target="_blank">Voir le site</a><br>
+                <img src="${jardin.image}" alt="${jardin.nom}" style="width:100px;height:auto;"><br>
+                ${jardin.description}<br>
+                <b>Horaires :</b> ${jardin.horaires}<br>
+                <b>Type :</b> ${jardin.type}<br>
+                <b>Public :</b> ${jardin.public}<br>
+                <b>Note :</b> ${jardin.note}<br>
+                <b>Avis :</b> ${jardin.avis}<br>
+                `);
 
-                    
-                const marker = L.marker([jardin.latitude, jardin.longitude])
-                    .bindPopup(`
-                    <b>${jardin.nom}</b><br>
-                    ${jardin.adresse}, ${jardin.codePostal} ${jardin.ville}<br>
-                    <a href="${jardin.siteWeb}" target="_blank">Voir le site</a><br>
-                    <img src="${jardin.image}" alt="${jardin.nom}" style="width:100px;height:auto;"><br>
-                    ${jardin.description}<br>
-                    <b>Horaires :</b> ${jardin.horaires}<br>
-                    <b>Tarifs :</b> ${jardin.tarifs}<br>
-                    <b>Accès :</b> ${jardin.acces}<br>
-                    <b>Parking :</b> ${jardin.parking}<br>
-                    <b>Accès transport :</b> ${jardin.accesTransport}<br>
-                    <b>Type :</b> ${jardin.type}<br>
-                    <b>Capacité :</b> ${jardin.capacite}<br>
-                    <b>Public :</b> ${jardin.public}<br>
-                    <b>Services :</b> ${jardin.services}<br>
-                    <b>Label :</b> ${jardin.label}<br>
-                    <b>Note :</b> ${jardin.note}<br>
-                    <b>Avis :</b> ${jardin.avis}<br>
-                    `);
-
-                markers.addLayer(marker);  // Ajouter le marqueur au groupe de clusters
-                } else {
-                console.error('Invalid LatLng for jardin:', jardin);
-                }
-            });
-
-            map.addLayer(markers);  // Ajouter le groupe de clusters à la carte
-
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((position) => {
-                const userLat = position.coords.latitude;
-                const userLng = position.coords.longitude;
-
-                map.setView([userLat, userLng], 13);
-
-                L.marker([userLat, userLng]).addTo(map)
-                    .bindPopup('Vous êtes ici')
-                    .openPopup();
-                }, (error) => {
-                console.error('Erreur lors de la récupération de la position de l\'utilisateur :', error);
-                });
+            markers.addLayer(marker);  // Ajouter le marqueur au groupe de clusters
             } else {
-                console.error('La géolocalisation n\'est pas supportée par ce navigateur.');
+            console.error('Invalid LatLng for jardin:', jardin);
             }
+        });
+
+        map.addLayer(markers);  // Ajouter le groupe de clusters à la carte
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+            const userLat = position.coords.latitude;
+            const userLng = position.coords.longitude;
+
+            map.setView([userLat, userLng], 13);
+
+            L.marker([userLat, userLng]).addTo(map)
+                .bindPopup('Vous êtes ici')
+                .openPopup();
+            }, (error) => {
+            console.error('Erreur lors de la récupération de la position de l\'utilisateur :', error);
             });
-        </script>
+        } else {
+            console.error('La géolocalisation n\'est pas supportée par ce navigateur.');
+        }
+        });
+    </script>
     </div>
 
     <!-- Banniere des cookies -->

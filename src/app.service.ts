@@ -54,4 +54,6 @@ export class AppService {
 
   geProfilOnboarding3() {}
 
+  getEspaceJardinage() {}
+
 }

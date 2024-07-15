@@ -28,7 +28,7 @@ Après avoir pris connaissance du message, vous décidez de participer à cet ap
 prévoyez que le projet prendra environ 3 mois pour un coût de 16 500€, en garantissant une réalisation
 éthique et respectueuse de l'environnement.
 
-PAGE / faq  --}}
+PAGE / espace-jardinage avec la map dynamique  --}}
 
 
 
@@ -37,27 +37,27 @@ PAGE / faq  --}}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Urban-Roots : La plateforme de jardinage urbain collaboratif</title>
+    <title>Urban-Roots : Espace jardinage</title>
 
     <!-- SEO Meta Tags -->
     <meta name="description" content="Urban-Roots est une plateforme de jardinage urbain collaboratif qui permet de localiser et créer des espaces de jardinage, partager ressources et conseils, échanger sur des forums communautaires, accéder à des modules éducatifs sur le jardinage urbain, mesurer les impacts environnementaux, et bien plus encore.">
     <meta name="author" content="Urban-Roots">
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Urban-Roots : La plateforme de jardinage urbain collaboratif">
+    <meta property="og:title" content="Urban-Roots : Espace jardinage">
     <meta property="og:description" content="Urban-Roots est une plateforme de jardinage urbain collaboratif qui permet de localiser et créer des espaces de jardinage, partager ressources et conseils, échanger sur des forums communautaires, accéder à des modules éducatifs sur le jardinage urbain, mesurer les impacts environnementaux, et bien plus encore.">
     <meta property="og:image" content="/img/Hero-Image.svg">
-    <meta property="og:url" content="https://www.urbanroot.fr/contact">
+    <meta property="og:url" content="https://www.urbanroot.fr/espace-jardinage">
     <meta property="og:type" content="website">
 
     <!-- Canonical Link -->
-    <link rel="canonical" href="https://www.urbanroot.fr/contact">
+    <link rel="canonical" href="https://www.urbanroot.fr/espace-jardinage">
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <link href="/styles.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <!-- Google Tag Manager -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DSKHG4RCJG"></script>
     <script>
@@ -76,11 +76,11 @@ PAGE / faq  --}}
             <p class="heading3">Urban-Roots</p>
         </a>
         <div class="hidden xl:flex menu-desktop">
-            <a href="/espace-jardinage" class="desktop-navlink">Espace jardinage</a>
+            <a href="/espace-jardinage" class="desktop-navlink activ-nav">Espace jardinage</a>
             <a href="#section-communautaire" class="desktop-navlink">Espace communautaire</a>
             <a href="blog" class="desktop-navlink">Modules éducatifs</a>
             <a href="/faq" class="desktop-navlink">FAQ</a>
-            <a href="/contact" class="desktop-navlink  activ-nav">Contact</a>
+            <a href="/contact" class="desktop-navlink">Contact</a>
         </div>
     </div>
 
@@ -89,7 +89,7 @@ PAGE / faq  --}}
     </div>
 </header>
 <main>
-<!-- Fullscreen menu -->
+    <!-- Fullscreen menu -->
     <nav id="fullscreen-menu" class="fixed inset-0 hidden z-40">
         <div>
             <a href="/espace-jardinage">Espace jardinage</a>
@@ -127,35 +127,107 @@ PAGE / faq  --}}
     </div>
 
     <div class=" my-32 mx-4 sm:mx-6 md:mx-auto contact-div">
-    <div>
-        <h1 class="contact-h1">
-            Des questions ?<br>
-            Des idées ? On est là pour vous !
-        </h1>
-        <p class="contact-p">
-            Vous avez des questions ? <span class="contact-span">
-                    Vous souhaitez en savoir plus sur Urban-Root et ses fonctionnalités ?
-                    <br>
-                </span> Ou peut-être avez-vous une idée de collaboration géniale en tête ?
-            <br><br>
-            Quelle que soit votre raison,<span class="contact-span"> nous serions ravis de vous parler !</span>
-        </p>
+        <div>
+            <h1 class="contact-h1">
+                A la recherche d'un jardin collaboratif ?<br>
+                Vous êtes au bon endroit !
+            </h1>
+            <p class="contact-p">
+                    Vous souhaitez savoir oû se trouvent les jardins collaboratifs autour de chez vous ?<span class="contact-span">
+                    
+                        <br>
+                    En cliquant sur les points de la carte,</span> vous pouvez accéder à des informations sur les jardins collaboratifs existants, les ressources disponibles, les événements à venir et bien plus encore.
+                <br>
+                <br>
+                <span class="contact-span">Vous pouvez également ajouter votre propre jardin collaboratif à la carte pour le partager avec la communauté.</span>
+                
 
-        <a class="contact-a" href="mailto:hello@smoozy-app.com">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <g clip-path="url(#clip0_490_4937)">
-                    <path d="M7 6C7 5.448 7.448 5 8 5H16C16.553 5 17 5.448 17 6C17 6.552 16.553 7 16 7H8C7.448 7 7 6.552 7 6ZM8 11H14C14.553 11 15 10.552 15 10C15 9.448 14.553 9 14 9H8C7.448 9 7 9.448 7 10C7 10.552 7.448 11 8 11ZM24 12.708V19C24 21.757 21.757 24 19 24H5C2.243 24 0 21.757 0 19V12.708C0 11.352 0.562 10.035 1.541 9.097L3 7.699V4C3 1.794 4.794 0 7 0H17C19.206 0 21 1.794 21 4V7.699L22.459 9.096C23.438 10.034 24 11.35 24 12.707V12.708ZM5 4V12.243L9.878 17.122C11.012 18.255 12.988 18.255 14.121 17.122L19 12.243V4C19 2.897 18.103 2 17 2H7C5.897 2 5 2.897 5 4ZM22 12.708C22 12.513 21.98 12.319 21.942 12.129L15.535 18.536C14.591 19.48 13.336 20 12 20C10.664 20 9.409 19.48 8.464 18.536L2.058 12.128C2.02 12.318 2 12.512 2 12.707V18.999C2 20.653 3.346 21.999 5 21.999H19C20.654 21.999 22 20.653 22 18.999V12.707V12.708Z" fill="#2F2F2F"/>
-                </g>
-                <defs>
-                    <clipPath id="clip0_490_4937">
-                        <rect width="24" height="24" fill="white"/>
-                    </clipPath>
-                </defs>
-            </svg>
-            <span class="contact-email">hello@urbanroot.fr</span>
-        </a>
-    </div>
-        <img src="/img/Famille_recomposée_épanouie.webp" alt="famille recomposée épanouie" class="contact-img">
+                    <a href="/blog" class="cta-lg outline-cta mt-6">
+                    Ajouter mon jardin
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M18 11.9996C17.9951 11.4735 17.7832 10.9705 17.41 10.5996L13.12 6.29958C12.9326 6.11333 12.6792 6.00879 12.415 6.00879C12.1508 6.00879 11.8974 6.11333 11.71 6.29958C11.6163 6.39254 11.5419 6.50315 11.4911 6.62501C11.4403 6.74686 11.4142 6.87757 11.4142 7.00958C11.4142 7.14159 11.4403 7.2723 11.4911 7.39416C11.5419 7.51602 11.6163 7.62662 11.71 7.71958L15 10.9996H5C4.73478 10.9996 4.48043 11.1049 4.29289 11.2925C4.10536 11.48 4 11.7344 4 11.9996C4 12.2648 4.10536 12.5192 4.29289 12.7067C4.48043 12.8942 4.73478 12.9996 5 12.9996H15L11.71 16.2896C11.5217 16.4766 11.4154 16.7307 11.4144 16.996C11.4135 17.2614 11.518 17.5163 11.705 17.7046C11.892 17.8929 12.1461 17.9992 12.4115 18.0001C12.6768 18.0011 12.9317 17.8966 13.12 17.7096L17.41 13.4096C17.7856 13.0362 17.9978 12.5292 18 11.9996Z" fill="#2F2F2F"></path>
+                    </svg>
+                </a>
+
+            </p>
+
+        </div>
+        <div id="map" style="width:100%; height:400px;z-index:1;"></div>
+
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+  
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+            const map = L.map('map').setView([48.8566, 2.3522], 6);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Insérer les données des jardins dans le script en tant que chaîne JSON
+            const jardinsData = `{{{jardins}}}`;  // Utilisation des triples accolades pour éviter l'échappement
+            const jardins = JSON.parse(jardinsData);  // Utilisation de JSON.parse pour convertir la chaîne en objet
+
+            // Créer un groupe de clusters
+            const markers = L.markerClusterGroup();
+
+            jardins.forEach(jardin => {
+                // Vérifiez que lat et lng sont définis avant de créer le marqueur
+                if (typeof jardin.latitude === 'number' && typeof jardin.longitude === 'number') {
+
+                    
+                const marker = L.marker([jardin.latitude, jardin.longitude])
+                    .bindPopup(`
+                    <b>${jardin.nom}</b><br>
+                    ${jardin.adresse}, ${jardin.codePostal} ${jardin.ville}<br>
+                    <a href="${jardin.siteWeb}" target="_blank">Voir le site</a><br>
+                    <img src="${jardin.image}" alt="${jardin.nom}" style="width:100px;height:auto;"><br>
+                    ${jardin.description}<br>
+                    <b>Horaires :</b> ${jardin.horaires}<br>
+                    <b>Tarifs :</b> ${jardin.tarifs}<br>
+                    <b>Accès :</b> ${jardin.acces}<br>
+                    <b>Parking :</b> ${jardin.parking}<br>
+                    <b>Accès transport :</b> ${jardin.accesTransport}<br>
+                    <b>Type :</b> ${jardin.type}<br>
+                    <b>Capacité :</b> ${jardin.capacite}<br>
+                    <b>Public :</b> ${jardin.public}<br>
+                    <b>Services :</b> ${jardin.services}<br>
+                    <b>Label :</b> ${jardin.label}<br>
+                    <b>Note :</b> ${jardin.note}<br>
+                    <b>Avis :</b> ${jardin.avis}<br>
+                    `);
+
+                markers.addLayer(marker);  // Ajouter le marqueur au groupe de clusters
+                } else {
+                console.error('Invalid LatLng for jardin:', jardin);
+                }
+            });
+
+            map.addLayer(markers);  // Ajouter le groupe de clusters à la carte
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                const userLat = position.coords.latitude;
+                const userLng = position.coords.longitude;
+
+                map.setView([userLat, userLng], 13);
+
+                L.marker([userLat, userLng]).addTo(map)
+                    .bindPopup('Vous êtes ici')
+                    .openPopup();
+                }, (error) => {
+                console.error('Erreur lors de la récupération de la position de l\'utilisateur :', error);
+                });
+            } else {
+                console.error('La géolocalisation n\'est pas supportée par ce navigateur.');
+            }
+            });
+        </script>
     </div>
 
     <!-- Banniere des cookies -->

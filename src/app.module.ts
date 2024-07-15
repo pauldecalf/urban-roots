@@ -17,14 +17,14 @@ import { ConfigModule } from "@nestjs/config";
 import { JwtModule } from '@nestjs/jwt';
 import { JwtAuthGuard } from './jwt-auth.guard'; // Assurez-vous que ce chemin est correct
 import { AuthMiddleware } from './auth.middleware';
-
+import { JardinsModule } from './jardins/jardins.module';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
       serveRoot: '/',
     }),
-    MongooseModule.forRoot('mongodb+srv://admin:admin@atlascluster.vfolo9m.mongodb.net/'),
+    MongooseModule.forRoot('mongodb+srv://admin:admin@atlascluster.vfolo9m.mongodb.net/UrbanRoot'),
     ArticlesModule,
     UtilisateursModule,
     FamillesModule,
@@ -33,6 +33,7 @@ import { AuthMiddleware } from './auth.middleware';
     MoodboardModule,
     TachesModule,
     ActivitesModule,
+    JardinsModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),

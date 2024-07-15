@@ -32,11 +32,11 @@ UrbanRoots propose les fonctionnalités suivantes :
 ## Technologies Utilisées
 
 - **Backend**: NestJS
-- **Frontend**: Angular
-- **Base de Données**: PostgreSQL
+- **Frontend**: NestJS
+- **Base de Données**: MongoDB
 - **Carte Interactive**: Leaflet
-- **Authentification**: OAuth 2.0
-- **Déploiement**: Docker, Kubernetes
+- **Authentification**: Google SignIn
+- **Déploiement**: Heroku
 
 ## Installation
 
@@ -51,7 +51,7 @@ UrbanRoots propose les fonctionnalités suivantes :
 1. **Clonez le dépôt**
 
    ```bash
-   git clone https://github.com/pauldecalf/urbanroots.git
+   git clone https://github.com/pauldecalf/urban-roots.git
    cd urbanroots
 2. **Installez les dépendances**
 
@@ -67,4 +67,3 @@ UrbanRoots propose les fonctionnalités suivantes :
     GOOGLE_OAUTH_CLIENT_ID=your-google-oauth-client-id
     GOOGLE_OAUTH_CLIENT_SECRET=your-google-oauth-client-secret
 
-    

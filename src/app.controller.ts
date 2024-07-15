@@ -19,6 +19,7 @@ import { AuthService } from './auth.service';
 import { UtilisateursService } from './utilisateurs/utilisateurs.service';
 import { CreateUtilisateurDto } from './utilisateurs/dto/create-utilisateur.dto';
 import { FamillesService } from './familles/familles.service';
+import { JardinsService } from './jardins/jardins.service';
 import { CreateFamilleDto } from './familles/dto/create-famille.dto';
 import { OAuth2Client } from 'google-auth-library';
 import { config } from 'dotenv';
@@ -46,6 +47,7 @@ export class AppController {
     private readonly authService: AuthService,
     private usersService: UtilisateursService,
     private readonly famillesService: FamillesService,
+    private readonly jardinsService: JardinsService,
     private configService: ConfigService
   ) {
     this.client = new OAuth2Client(clientId, clientSecret);
@@ -578,6 +580,15 @@ async postProfilOnboarding2(@UploadedFile() file, @Body('email') email: string) 
 @Render('profil-onboarding-3')
 geProfilOnboarding3() {
   return this.appService.geProfilOnboarding3();
+}
+
+
+
+@Get('/espace-jardinage')
+@Render('espace-jardinage')
+async getEspaceJardinage() {
+  const jardins = await this.jardinsService.findAll();
+  return { jardins: JSON.stringify(jardins) };  // Convertir les données en chaîne JSON
 }
 
 }

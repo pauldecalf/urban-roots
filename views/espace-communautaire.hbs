@@ -1,3 +1,4 @@
+
 {{!-- Un message dans votre boîte mail attire votre attention :
 
 Objet : Demande de collaboration pour le développement de la plateforme UrbanRoots
@@ -27,28 +28,30 @@ Après avoir pris connaissance du message, vous décidez de participer à cet ap
 prévoyez que le projet prendra environ 3 mois pour un coût de 16 500€, en garantissant une réalisation
 éthique et respectueuse de l'environnement.
 
-PAGE / module-educatif avec differents posts  --}}
+PAGE / faq  --}}
+
+
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Urban-Roots - Nos modules éducatifs</title>
+    <title>Urban-Roots : Espace communautaire</title>
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Nos modules éducatifs vous permettent de découvrir des articles et conseils pour jardiner de manière éco-responsable en ville.">
-    <meta name="author" content="Smoozy">
+    <meta name="description" content="Notre espace communautaire est un lieu d'échange et de partage pour tous les passionnés de jardinage urbain. Retrouvez des ressources, des conseils, des forums de discussion, des modules éducatifs et bien plus encore !">
+    <meta name="author" content="Urban-Roots">
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Urban-Roots - Nos modules éducatifs">
-    <meta property="og:description" content="Nos modules éducatifs vous permettent de découvrir des articles et conseils pour jardiner de manière éco-responsable en ville.">
+    <meta property="og:title" content="Urban-Roots : Espace communautaire">
+    <meta property="og:description" content="Notre espace communautaire est un lieu d'échange et de partage pour tous les passionnés de jardinage urbain. Retrouvez des ressources, des conseils, des forums de discussion, des modules éducatifs et bien plus encore !">
     <meta property="og:image" content="/img/Hero-Image.svg">
-    <meta property="og:url" content="https://smoozy-app.com/blog">
+    <meta property="og:url" content="https://www.urbanroot.fr/espace-communautaire">
     <meta property="og:type" content="website">
 
     <!-- Canonical Link -->
-    <link rel="canonical" href="https://smoozy-app.com/blog">
+    <link rel="canonical" href="https://www.urbanroot.fr/espace-communautaire">
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <link href="/styles.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -65,10 +68,10 @@ PAGE / module-educatif avec differents posts  --}}
         </a>
         <div class="hidden xl:flex menu-desktop">
             <a href="/espace-jardinage" class="desktop-navlink">Espace jardinage</a>
-            <a href="/espace-communautaire" class="desktop-navlink">Espace communautaire</a>
-            <a href="blog" class="desktop-navlink activ-nav">Modules éducatifs</a>
+            <a href="/espace-communautaire" class="desktop-navlink activ-nav">Espace communautaire</a>
+            <a href="blog" class="desktop-navlink">Modules éducatifs</a>
             <a href="/faq" class="desktop-navlink">FAQ</a>
-            <a href="/contact" class="desktop-navlink">Contact</a>
+            <a href="/contact" class="desktop-navlink  activ-nav">Contact</a>
         </div>
     </div>
 
@@ -77,7 +80,7 @@ PAGE / module-educatif avec differents posts  --}}
     </div>
 </header>
 <main>
-    <!-- Fullscreen menu -->
+<!-- Fullscreen menu -->
     <nav id="fullscreen-menu" class="fixed inset-0 hidden z-40">
         <div>
             <a href="/espace-jardinage">Espace jardinage</a>
@@ -114,81 +117,37 @@ PAGE / module-educatif avec differents posts  --}}
         </div>
     </div>
 
-    <!-- Blog -->
-    <section class="flex mt-32 blog-div">
-        <h1 class="display-title">
-            Module éducatif
+    <div class=" my-32 mx-4 sm:mx-6 md:mx-auto contact-div">
+    <div>
+        <h1 class="contact-h1">
+            Des questions ?<br>
+            Des idées ? On est là pour vous !
         </h1>
-        <p class="blog-p">
-            Vous trouverez ici des articles dédiés au jardinage urbain collaboratif. Découvrez nos conseils et astuces pour jardiner de manière éco-responsable en ville.
+        <p class="contact-p">
+            Vous avez des questions ? <span class="contact-span">
+                    Vous souhaitez en savoir plus sur Urban-Root et ses fonctionnalités ?
+                    <br>
+                </span> Ou peut-être avez-vous une idée de collaboration géniale en tête ?
+            <br><br>
+            Quelle que soit votre raison,<span class="contact-span"> nous serions ravis de vous parler !</span>
         </p>
-        <h2 class="blog-h2">Nos derniers articles</h2>
-        <section class="article-container">
-            {{#each articles}}
-                <article class="grid-item">
-                    <div class="article">
-                        <img src="{{this.img}}" class="image" alt="famille recomposée épanouie">
-                        <div class="article-meta" >
-                            <div class="tag category">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                    <g clip-path="url(#clip0_684_155)">
-                                        <path d="M5.78044 6.94184C6.07369 7.23509 6.07369 7.70984 5.78044 8.00234C5.48719 8.29559 5.01244 8.29559 4.71994 8.00234C4.42669 7.70909 4.42669 7.23434 4.71994 6.94184C5.01319 6.64859 5.48794 6.64859 5.78044 6.94184ZM16.1694 11.5056L15.7457 11.9293C15.7254 12.8541 15.3669 13.7721 14.6694 14.4786L12.2942 16.8846C11.5869 17.6008 10.6434 17.9968 9.63694 17.9998H9.62419C8.62294 17.9998 7.68169 17.6098 6.97369 16.9018L1.41169 11.3871C0.924192 10.9003 0.688692 10.2306 0.763692 9.54734L1.33744 4.36034C1.37569 4.01834 1.64044 3.74609 1.98094 3.69959L7.14769 2.99309C7.84669 2.90009 8.55019 3.13784 9.04369 3.63134L14.6499 9.19034C14.9402 9.48059 15.1727 9.80759 15.3482 10.1563C15.9572 9.28184 15.8717 8.06009 15.0917 7.28009L9.39844 1.72634C9.22669 1.55459 8.98969 1.47509 8.76019 1.50734L3.59344 2.21384C3.18169 2.26934 2.80444 1.98209 2.74819 1.57259C2.69269 1.16234 2.97994 0.784343 3.38944 0.728093L8.55694 0.0208426C9.24769 -0.0774075 9.95869 0.164093 10.4529 0.659843L16.1447 6.21359C17.6042 7.67234 17.6124 10.0438 16.1687 11.5063L16.1694 11.5056ZM13.5909 10.2531L7.98469 4.69409C7.81744 4.52684 7.58269 4.44959 7.34944 4.47884L2.76319 5.10659L2.25394 9.71159C2.22919 9.93884 2.30719 10.1623 2.46919 10.3236L8.03119 15.8383C8.45794 16.2658 9.02269 16.4991 9.62344 16.4991H9.63094C10.2354 16.4976 10.8017 16.2598 11.2254 15.8293L13.6007 13.4233C14.4669 12.5458 14.4624 11.1231 13.5902 10.2516L13.5909 10.2531Z" fill="#2F2F2F" />
-                                    </g>
-                                    <defs>
-                                        <clipPath >
-                                            <rect width="18" height="18" fill="white" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                                <span>{{this.category}}</span>
-                            </div>
-                            <div class="tag createdAt">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                    <g clip-path="url(#clip0_684_159)">
-                                        <path d="M9 18C4.03725 18 0 13.9628 0 9C0 4.03725 4.03725 0 9 0C13.9628 0 18 4.03725 18 9C18 13.9628 13.9628 18 9 18ZM9 1.5C4.8645 1.5 1.5 4.8645 1.5 9C1.5 13.1355 4.8645 16.5 9 16.5C13.1355 16.5 16.5 13.1355 16.5 9C16.5 4.8645 13.1355 1.5 9 1.5ZM10.875 12.2475C11.2343 12.0405 11.3573 11.5815 11.1495 11.223L9.75 8.799V4.5C9.75 4.086 9.41475 3.75 9 3.75C8.58525 3.75 8.25 4.086 8.25 4.5V9C8.25 9.132 8.2845 9.261 8.3505 9.375L9.8505 11.973C9.99 12.2137 10.2413 12.348 10.5008 12.348C10.6283 12.348 10.7572 12.3158 10.875 12.2475Z" fill="#2F2F2F" />
-                                    </g>
-                                    <defs>
-                                        <clipPath >
-                                            <rect width="18" height="18" fill="white" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                                <span>{{formatDate this.createdAt}}</span>
-                            </div>
-                        </div>
-                        <div class="article-content">
-                            <p class="article-title">{{this.title}}</p>
-                            <p class="article-text">{{this.intro}}</p>
-                            <a class="read-more" href="/articles/{{this.slugUrl}}">
-                                <span>Lire plus</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M18 11.9996C17.9951 11.4735 17.7832 10.9705 17.41 10.5996L13.12 6.29958C12.9326 6.11333 12.6792 6.00879 12.415 6.00879C12.1508 6.00879 11.8974 6.11333 11.71 6.29958C11.6163 6.39254 11.5419 6.50315 11.4911 6.62501C11.4403 6.74686 11.4142 6.87757 11.4142 7.00958C11.4142 7.14159 11.4403 7.2723 11.4911 7.39416C11.5419 7.51602 11.6163 7.62662 11.71 7.71958L15 10.9996H5C4.73478 10.9996 4.48043 11.1049 4.29289 11.2925C4.10536 11.48 4 11.7344 4 11.9996C4 12.2648 4.10536 12.5192 4.29289 12.7067C4.48043 12.8942 4.73478 12.9996 5 12.9996H15L11.71 16.2896C11.5217 16.4766 11.4154 16.7307 11.4144 16.996C11.4135 17.2614 11.518 17.5163 11.705 17.7046C11.892 17.8929 12.1461 17.9992 12.4115 18.0001C12.6768 18.0011 12.9317 17.8966 13.12 17.7096L17.41 13.4096C17.7856 13.0362 17.9978 12.5292 18 11.9996Z" fill="#2F2F2F" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-            {{/each}}
-        </section>
 
-        <div class="blog-div-pagination">
-            {{#if (gt currentPage 1)}}
-                <a href="?page={{subtract currentPage 1}}" class="pagination-button">Page précédente</a>
-            {{/if}}
-
-            {{#each (range 1 totalPages)}}
-                {{#isCurrentPage this ../currentPage}}
-                    <span class="pagination-button current">{{this}}</span>
-                {{else}}
-                    <a href="?page={{this}}" class="pagination-button">{{this}}</a>
-                {{/isCurrentPage}}
-            {{/each}}
-
-            {{#if (lt currentPage totalPages)}}
-                <a href="?page={{add currentPage 1}}" class="pagination-button">Page suivante</a>
-            {{/if}}
-        </div>
-    </section>
+        <a class="contact-a" href="mailto:hello@smoozy-app.com">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <g clip-path="url(#clip0_490_4937)">
+                    <path d="M7 6C7 5.448 7.448 5 8 5H16C16.553 5 17 5.448 17 6C17 6.552 16.553 7 16 7H8C7.448 7 7 6.552 7 6ZM8 11H14C14.553 11 15 10.552 15 10C15 9.448 14.553 9 14 9H8C7.448 9 7 9.448 7 10C7 10.552 7.448 11 8 11ZM24 12.708V19C24 21.757 21.757 24 19 24H5C2.243 24 0 21.757 0 19V12.708C0 11.352 0.562 10.035 1.541 9.097L3 7.699V4C3 1.794 4.794 0 7 0H17C19.206 0 21 1.794 21 4V7.699L22.459 9.096C23.438 10.034 24 11.35 24 12.707V12.708ZM5 4V12.243L9.878 17.122C11.012 18.255 12.988 18.255 14.121 17.122L19 12.243V4C19 2.897 18.103 2 17 2H7C5.897 2 5 2.897 5 4ZM22 12.708C22 12.513 21.98 12.319 21.942 12.129L15.535 18.536C14.591 19.48 13.336 20 12 20C10.664 20 9.409 19.48 8.464 18.536L2.058 12.128C2.02 12.318 2 12.512 2 12.707V18.999C2 20.653 3.346 21.999 5 21.999H19C20.654 21.999 22 20.653 22 18.999V12.707V12.708Z" fill="#2F2F2F"/>
+                </g>
+                <defs>
+                    <clipPath id="clip0_490_4937">
+                        <rect width="24" height="24" fill="white"/>
+                    </clipPath>
+                </defs>
+            </svg>
+            <span class="contact-email">contact@urbanroot.fr</span>
+        </a>
+    </div>
+        <img src="/img/Famille_recomposée_épanouie.webp" alt="famille recomposée épanouie" class="contact-img">
+    </div>
 
     <!-- Banniere des cookies -->
     <div id="cookie-banner" class="cookie-banner">

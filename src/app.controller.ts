@@ -29,6 +29,7 @@ import { UseInterceptors, UploadedFile } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import * as path from 'path';
+import { get } from 'http';
 config();
 
 const clientId = process.env.GOOGLE_CLIENT_ID;
@@ -589,6 +590,12 @@ geProfilOnboarding3() {
 async getEspaceJardinage() {
   const jardins = await this.jardinsService.findAll();
   return { jardins: JSON.stringify(jardins) };  // Convertir les données en chaîne JSON
+}
+
+
+@Get('/espace-communautaire')
+@Render('espace-communautaire')
+async getEspaceCommunautaire() {
 }
 
 }

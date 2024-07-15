@@ -56,4 +56,6 @@ export class AppService {
 
   getEspaceJardinage() {}
 
+  getEspaceCommunautaire() {}
+
 }

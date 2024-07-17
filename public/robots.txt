@@ -6,4 +6,4 @@ Disallow: /admin/
 Disallow: /login/
 Disallow: /test/
 
-Sitemap: https://urbanroot-d388a0ae64e1.herokuapp.com/sitemap.xml
+Sitemap: https://www.urbanroot.fr/sitemap.xml

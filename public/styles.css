@@ -4695,6 +4695,14 @@ video {
   height: 1.5rem;
 }
 
+.w-1\/5{
+  width: 20%;
+}
+
+.w-3\/5{
+  width: 60%;
+}
+
 .w-6{
   width: 1.5rem;
 }
@@ -4719,6 +4727,10 @@ video {
   justify-content: center;
 }
 
+.gap-3{
+  gap: 0.75rem;
+}
+
 .rounded-lg{
   border-radius: 0.5rem;
 }
@@ -4727,8 +4739,17 @@ video {
   border-radius: 0.75rem;
 }
 
+.bg-blue-500{
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+}
+
 .p-2{
   padding: 0.5rem;
+}
+
+.p-5{
+  padding: 1.25rem;
 }
 
 .outline{

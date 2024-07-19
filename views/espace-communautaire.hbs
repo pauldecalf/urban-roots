@@ -37,15 +37,15 @@ PAGE / faq  --}}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Urban-Roots : Espace communautaire</title>
+    <title>Notre espace communautaire - Urban-Roots</title>
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Notre espace communautaire est un lieu d'échange et de partage pour tous les passionnés de jardinage urbain. Retrouvez des ressources, des conseils, des forums de discussion, des modules éducatifs et bien plus encore !">
+    <meta name="description" content="Rejoignez notre espace communautaire Urban-Roots, un lieu d'échange pour passionnés de jardinage urbain. Découvrez des ressources, conseils, forums, et modules éducatifs !">
     <meta name="author" content="Urban-Roots">
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Urban-Roots : Espace communautaire">
-    <meta property="og:description" content="Notre espace communautaire est un lieu d'échange et de partage pour tous les passionnés de jardinage urbain. Retrouvez des ressources, des conseils, des forums de discussion, des modules éducatifs et bien plus encore !">
+    <meta property="og:title" content="Notre espace communautaire - Urban-Roots">
+    <meta property="og:description" content="Rejoignez notre espace communautaire Urban-Roots, un lieu d'échange pour passionnés de jardinage urbain. Découvrez des ressources, conseils, forums, et modules éducatifs !">
     <meta property="og:image" content="/img/Hero-Image.svg">
     <meta property="og:url" content="https://www.urbanroot.fr/espace-communautaire">
     <meta property="og:type" content="website">
@@ -57,7 +57,9 @@ PAGE / faq  --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.4.2/uicons-regular-rounded/css/uicons-regular-rounded.css">
 </head>
+
 
 <body>
 <!-- Header -->
@@ -69,7 +71,7 @@ PAGE / faq  --}}
         <div class="hidden xl:flex menu-desktop">
             <a href="/espace-jardinage" class="desktop-navlink">Espace jardinage</a>
             <a href="/espace-communautaire" class="desktop-navlink activ-nav">Espace communautaire</a>
-            <a href="blog" class="desktop-navlink">Modules éducatifs</a>
+            <a href="/blog" class="desktop-navlink">Modules éducatifs</a>
             <a href="/faq" class="desktop-navlink">FAQ</a>
             <a href="/contact" class="desktop-navlink">Contact</a>
         </div>
@@ -85,7 +87,7 @@ PAGE / faq  --}}
         <div>
             <a href="/espace-jardinage">Espace jardinage</a>
             <a href="/espace-communautaire">Espace communautaire</a>
-            <a href="blog">Modules éducatifs</a>
+            <a href="/blog">Modules éducatifs</a>
             <a href="/faq">FAQ</a>
             <a href="/contact">Contact</a>
         </div>
@@ -117,37 +119,29 @@ PAGE / faq  --}}
         </div>
     </div>
 
-    <div class=" my-32 mx-4 sm:mx-6 md:mx-auto contact-div">
-    <div>
-        <h1 class="contact-h1">
-            Des questions ?<br>
-            Des idées ? On est là pour vous !
-        </h1>
-        <p class="contact-p">
-            Vous avez des questions ? <span class="contact-span">
-                    Vous souhaitez en savoir plus sur Urban-Root et ses fonctionnalités ?
-                    <br>
-                </span> Ou peut-être avez-vous une idée de collaboration géniale en tête ?
-            <br><br>
-            Quelle que soit votre raison,<span class="contact-span"> nous serions ravis de vous parler !</span>
-        </p>
+    <section class="flex flex-column w-full my-32">
+        <div class="column-left w-1/5 ">
+            <button type="button" class="flex gap-3 bg-blue-500 p-5">
+                <i class="fi fi-rr-home"></i>
+                <span>Accueil</span>
+            </button>
+            <button type="button" class="flex gap-3 p-5">
+                <i class="fi fi-rr-comment"></i>
+                <span>Mes posts</span>
+            </button>
+            <button type="button" class="flex gap-3 p-5">
+                <i class="fi fi-rr-bookmark"></i>
+                <span>Mes favoris</span>
+            </button>
+        </div>
+        <div class="column-center w-3/5"></div>
+        <div class="column-right w-1/5"></div>
+    </section>
 
-        <a class="contact-a" href="mailto:hello@smoozy-app.com">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <g clip-path="url(#clip0_490_4937)">
-                    <path d="M7 6C7 5.448 7.448 5 8 5H16C16.553 5 17 5.448 17 6C17 6.552 16.553 7 16 7H8C7.448 7 7 6.552 7 6ZM8 11H14C14.553 11 15 10.552 15 10C15 9.448 14.553 9 14 9H8C7.448 9 7 9.448 7 10C7 10.552 7.448 11 8 11ZM24 12.708V19C24 21.757 21.757 24 19 24H5C2.243 24 0 21.757 0 19V12.708C0 11.352 0.562 10.035 1.541 9.097L3 7.699V4C3 1.794 4.794 0 7 0H17C19.206 0 21 1.794 21 4V7.699L22.459 9.096C23.438 10.034 24 11.35 24 12.707V12.708ZM5 4V12.243L9.878 17.122C11.012 18.255 12.988 18.255 14.121 17.122L19 12.243V4C19 2.897 18.103 2 17 2H7C5.897 2 5 2.897 5 4ZM22 12.708C22 12.513 21.98 12.319 21.942 12.129L15.535 18.536C14.591 19.48 13.336 20 12 20C10.664 20 9.409 19.48 8.464 18.536L2.058 12.128C2.02 12.318 2 12.512 2 12.707V18.999C2 20.653 3.346 21.999 5 21.999H19C20.654 21.999 22 20.653 22 18.999V12.707V12.708Z" fill="#2F2F2F"/>
-                </g>
-                <defs>
-                    <clipPath id="clip0_490_4937">
-                        <rect width="24" height="24" fill="white"/>
-                    </clipPath>
-                </defs>
-            </svg>
-            <span class="contact-email">contact@urbanroot.fr</span>
-        </a>
-    </div>
-        <img src="/img/Famille_recomposée_épanouie.webp" alt="famille recomposée épanouie" class="contact-img">
-    </div>
+
+
+
+
 
     <!-- Banniere des cookies -->
     <div id="cookie-banner" class="cookie-banner">

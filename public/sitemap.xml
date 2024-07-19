@@ -67,12 +67,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.urbanroot.fr/loading</loc>
-    <lastmod>2024-07-15</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.1</priority>
-  </url>
-  <url>
     <loc>https://www.urbanroot.fr/login</loc>
     <lastmod>2024-07-15</lastmod>
     <changefreq>monthly</changefreq>

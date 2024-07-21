@@ -119,26 +119,124 @@ PAGE / faq  --}}
         </div>
     </div>
 
-    <section class="flex flex-column w-full my-32">
-        <div class="column-left w-1/5 ">
-            <button type="button" class="flex gap-3 bg-blue-500 p-5">
+<section class="grid grid-cols-8 w-full my-16">
+    <div class="column-left col-span-2 flex flex-col m-12">
+        <div class="flex flex-col gap-2 mb-10">
+            <button type="button" class="p-3 flex gap-5 cta-column-left rounded-lg fit-content">
                 <i class="fi fi-rr-home"></i>
                 <span>Accueil</span>
             </button>
-            <button type="button" class="flex gap-3 p-5">
+            <button type="button" class="p-3 flex gap-5 cta-column-left rounded-lg fit-content">
                 <i class="fi fi-rr-comment"></i>
                 <span>Mes posts</span>
             </button>
-            <button type="button" class="flex gap-3 p-5">
+            <button type="button" class="p-3 flex gap-5 cta-column-left rounded-lg fit-content">
                 <i class="fi fi-rr-bookmark"></i>
                 <span>Mes favoris</span>
             </button>
         </div>
-        <div class="column-center w-3/5"></div>
-        <div class="column-right w-1/5"></div>
-    </section>
+        <h2 class="heading4 mb-3">Sujet en tendance</h2>
+
+        <div class="flex flex-col gap-5">
+            <button type="button" class="p-3 flex gap-5 rounded-lg fit-content cta-tendance">
+                <div class="flex flex-col items-start">
+                    <p class="text-base font-bold">Agriculture</p>
+                    <p class="text-sm">20/07/2024 - 17:38</p>
+                </div>
+                <span class="text-sm font-bold  cta-column-left-topic rounded-xl p-4">2</span>
+            </button>
+            <button type="button" class="p-3 flex gap-5 rounded-lg fit-content cta-tendance">
+                <div class="flex flex-col items-start">
+                    <p class="text-base font-bold">Ressources</p>
+                    <p class="text-sm">01/07/2024 - 21:47</p>
+                </div>
+                <span class="text-sm font-bold  cta-column-left-topic rounded-xl p-4">49</span>
+            </button>
+            <button type="button" class="p-3 flex gap-5 rounded-lg fit-content cta-tendance">
+                <div class="flex flex-col items-start">
+                    <p class="text-base font-bold">Ressources</p>
+                    <p class="text-sm">01/07/2024 - 21:47</p>
+                </div>
+                <span class="text-sm font-bold  cta-column-left-topic rounded-xl p-4">49</span>
+            </button>
+        </div>
+    </div>
+    <div class="column-center col-span-6 m-12 flex flex-col gap-6">
+        <div class="flex input-new-post p-4 rounded-xl w-fill-available justify-between">
+            <input type="text" placeholder="Créez un nouveau post" class="input-create-post w-inherit">
+            <button type="button" class="cta-create-post p-2 rounded-lg"><img src="/img/plus.png" alt="icon plus"></button>
+        </div>
 
 
+        <div class="flex flex-col post p-8 rounded-xl w-fill-available gap-5">
+            <h2 class="heading4">Titre du post</h2>
+            <div class="flex gap-5 justify-between">
+                <div class="flex gap-4">
+                    <img src="/img/fille-brune-posant.jpg" width="56" alt="image de photo de profil" class="rounded-xl">
+                    <div>
+                        <p class="text-sm font-bold">Olivia</p>
+                        <p class="text-sm">Il y a 12heures</p>
+                    </div>
+                </div>
+                <div>
+                    <button type="button" class="cta-post-tag p-2 rounded-lg">Nouveau membre</button>
+                </div>
+            </div>
+
+            <!-- Contenu du post -->
+            <div class="text-gray-800 leading-relaxed mb-4">
+                <p>Bonjour à tous,</p>
+                <p>Je souhaite partager avec vous quelques conseils pour réussir la plantation de tomates sur un balcon. Voici quelques étapes clés :</p>
+                <ul class="list-disc list-inside ml-4">
+                    <li>Choisissez des variétés adaptées à la culture en pot.</li>
+                    <li>Utilisez un terreau de qualité et des pots assez grands.</li>
+                    <li>Assurez-vous que les plants reçoivent au moins 6 heures de soleil par jour.</li>
+                    <li>Arrosez régulièrement, mais sans excès pour éviter le pourrissement des racines.</li>
+                    <li>Pensez à tuteurer les plants pour les soutenir à mesure qu'ils grandissent.</li>
+                <p>N'hésitez pas à partager vos propres astuces et expériences !</p>
+            </div>
+
+                    <!-- Boutons d'interaction -->
+        <div class="flex gap-5 mb-4">
+            <div class="flex items-center">
+                <button class="p-3 flex gap-5 cta-column-left rounded-xl fit-content">
+                    <i class="fi fi-rr-bookmark"></i>
+                </button>
+            </div>
+            <div class="flex items-center gap-4">
+                <button id="ajouter-une-reponse" class="p-3 flex gap-5 cta-column-left rounded-xl fit-content">
+                    <i class="fi fi-rr-comment"></i>
+                    Ajouter une réponse
+                </button>
+            </div>
+        </div>
+
+        <!-- Réponses -->
+        <div class="flex post p-8 rounded-xl w-full gap-5 hidden" id="ecrire-une-reponse">
+            <input type="text" placeholder="Votre réponse" class="input-create-post w-full p-2 border border-gray-300 rounded-lg">
+            <button type="button" class="cta-create-post p-4 rounded-lg bg-blue-500 text-white hover:bg-blue-600">
+                <img src="/img/plus.png" alt="icon plus">
+            </button>
+        </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+        document.getElementById('ajouter-une-reponse').addEventListener('click', function() {
+            let ajouterunereponse = document.getElementById('ajouter-une-reponse');
+            let reponseDiv = document.getElementById('ecrire-une-reponse');
+            if (reponseDiv.classList.contains('hidden')) {
+                reponseDiv.classList.remove('hidden');
+                ajouterunereponse.style.backgroundColor = '#E6E2FB';
+                
+            } else {
+                reponseDiv.classList.add('hidden');
+                ajouterunereponse.style.backgroundColor = '#ECECEC';
+            }
+        });
+    </script>
 
 
 

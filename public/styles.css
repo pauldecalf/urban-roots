@@ -73,6 +73,52 @@ body {
   background-color: var(--color-neutral-cream-100);
 }
 
+.input-new-post{
+  background-color: #ececec;
+}
+
+.input-create-post{
+  background-color: transparent;
+}
+
+.cta-post-tag{
+  background-color: #d57bff;
+  color: white;
+}
+
+.input-create-post, input:focus,
+.input-create-post, input:active {
+  outline: none;
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.post, input:focus,
+.post, input:active {
+  outline: none;
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.input-create-post:hover{
+  background: white;
+}
+
+.input-new-post:hover{
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  background: white;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+}
+
+.post{
+  background: white;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+}
+
+.cta-create-post{
+  background-color: #846DED;
+}
+
 /*DESIGN SYSTEM*/
 
 /*CTA*/
@@ -88,6 +134,33 @@ body {
   font-family: Plus Jakarta Sans, sans-serif;
   font-weight: 700;
   font-size: clamp(1rem, 0.928rem + 0.36vw, 1.25rem);
+}
+
+.fit-content {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.cta-column-left-topic{
+  background-color: #F1F1F1;
+  color: #846ded;
+}
+
+.cta-tendance:hover{
+  background: white;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+}
+
+.cta-tendance {
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-column-left:hover{
+  background: var(--Color-Brand-Primary-20, #E6E2FB);
+}
+
+.cta-column-left{
+  background: var(--Color-Brand-Primary-20, #ECECEC);
 }
 
 .cta-lg {
@@ -4657,9 +4730,26 @@ video {
   z-index: 50;
 }
 
+.col-span-2{
+  grid-column: span 2 / span 2;
+}
+
+.col-span-6{
+  grid-column: span 6 / span 6;
+}
+
+.m-12{
+  margin: 3rem;
+}
+
 .mx-4{
   margin-left: 1rem;
   margin-right: 1rem;
+}
+
+.my-16{
+  margin-top: 4rem;
+  margin-bottom: 4rem;
 }
 
 .my-32{
@@ -4667,8 +4757,24 @@ video {
   margin-bottom: 8rem;
 }
 
+.mb-10{
+  margin-bottom: 2.5rem;
+}
+
+.mb-3{
+  margin-bottom: 0.75rem;
+}
+
+.mb-4{
+  margin-bottom: 1rem;
+}
+
 .ml-2{
   margin-left: 0.5rem;
+}
+
+.ml-4{
+  margin-left: 1rem;
 }
 
 .mt-2{
@@ -4687,6 +4793,10 @@ video {
   display: flex;
 }
 
+.grid{
+  display: grid;
+}
+
 .hidden{
   display: none;
 }
@@ -4695,20 +4805,20 @@ video {
   height: 1.5rem;
 }
 
-.w-1\/5{
-  width: 20%;
-}
-
-.w-3\/5{
-  width: 60%;
-}
-
 .w-6{
   width: 1.5rem;
 }
 
+.w-fill-available{
+  width: -webkit-fill-available;
+}
+
 .w-full{
   width: 100%;
+}
+
+.w-inherit{
+  width: inherit;
 }
 
 .transform{
@@ -4719,6 +4829,26 @@ video {
   cursor: pointer;
 }
 
+.list-inside{
+  list-style-position: inside;
+}
+
+.list-disc{
+  list-style-type: disc;
+}
+
+.grid-cols-8{
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+}
+
+.flex-col{
+  flex-direction: column;
+}
+
+.items-start{
+  align-items: flex-start;
+}
+
 .items-center{
   align-items: center;
 }
@@ -4727,8 +4857,24 @@ video {
   justify-content: center;
 }
 
-.gap-3{
-  gap: 0.75rem;
+.justify-between{
+  justify-content: space-between;
+}
+
+.gap-2{
+  gap: 0.5rem;
+}
+
+.gap-4{
+  gap: 1rem;
+}
+
+.gap-5{
+  gap: 1.25rem;
+}
+
+.gap-6{
+  gap: 1.5rem;
 }
 
 .rounded-lg{
@@ -4737,6 +4883,15 @@ video {
 
 .rounded-xl{
   border-radius: 0.75rem;
+}
+
+.border{
+  border-width: 1px;
+}
+
+.border-gray-300{
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
 .bg-blue-500{
@@ -4748,8 +4903,44 @@ video {
   padding: 0.5rem;
 }
 
-.p-5{
-  padding: 1.25rem;
+.p-3{
+  padding: 0.75rem;
+}
+
+.p-4{
+  padding: 1rem;
+}
+
+.p-8{
+  padding: 2rem;
+}
+
+.text-base{
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.text-sm{
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.font-bold{
+  font-weight: 700;
+}
+
+.leading-relaxed{
+  line-height: 1.625;
+}
+
+.text-gray-800{
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity));
+}
+
+.text-white{
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .outline{
@@ -4767,6 +4958,11 @@ video {
 }
 
 /* Importez votre CSS personnalisé ici */
+
+.hover\:bg-blue-600:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(37 99 235 / var(--tw-bg-opacity));
+}
 
 @media (min-width: 640px){
   .sm\:mx-6{
@@ -4787,10 +4983,6 @@ video {
 }
 
 @media (min-width: 1280px){
-  .xl\:block{
-    display: block;
-  }
-
   .xl\:flex{
     display: flex;
   }

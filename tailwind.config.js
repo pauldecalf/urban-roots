@@ -5,7 +5,12 @@ module.exports = {
     './views/**/*.{html,hbs}', // Ajoutez ce chemin pour inclure les fichiers Handlebars
   ],
   theme: {
-    extend: {},
+    extend: {
+      width: {
+        'fill-available': '-webkit-fill-available',
+        'inherit': 'inherit',
+      },
+    },
     screens: {
       'sm': '640px',
       'md': '768px',

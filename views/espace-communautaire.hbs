@@ -120,7 +120,7 @@ PAGE / faq  --}}
     </div>
 
 <section class="grid grid-cols-8 w-full my-16">
-    <div class="column-left col-span-2 flex flex-col m-12">
+    <div id="column-left" class="column-left col-span-2 flex flex-col m-12">
         <div class="flex flex-col gap-2 mb-10">
             <button type="button" class="p-3 flex gap-5 cta-column-left rounded-lg fit-content">
                 <i class="fi fi-rr-home"></i>
@@ -161,7 +161,10 @@ PAGE / faq  --}}
             </button>
         </div>
     </div>
-    <div class="column-center col-span-6 m-12 flex flex-col gap-6">
+    <div id="column-right" class="column-center col-span-6 m-12 flex flex-col gap-6">
+            <div>
+        <h1 class="heading2">Bienvenue sur l'espace communautaire</h1>
+    </div>
         <div class="flex input-new-post p-4 rounded-xl w-fill-available justify-between">
             <input type="text" placeholder="Créez un nouveau post" class="input-create-post w-inherit">
             <button type="button" class="cta-create-post p-2 rounded-lg"><img src="/img/plus.png" alt="icon plus"></button>

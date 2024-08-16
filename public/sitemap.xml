@@ -1,99 +1,56 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://www.urbanroot.fr/</loc>
-    <lastmod>2024-07-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://www.urbanroot.fr/articles/composter-milieu-urbain</loc>
-    <lastmod>2024-07-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.urbanroot.fr/articles/conseils-potager-urbain</loc>
-    <lastmod>2024-07-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.urbanroot.fr/articles/jardiner-balcon-astuces</loc>
-    <lastmod>2024-07-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.urbanroot.fr/articles/outils-jardinage-urbain</loc>
-    <lastmod>2024-07-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.urbanroot.fr/articles/plantes-jardin-urbain</loc>
-    <lastmod>2024-07-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.urbanroot.fr/blog</loc>
-    <lastmod>2024-07-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.urbanroot.fr/contact</loc>
-    <lastmod>2024-07-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.urbanroot.fr/espace-communautaire</loc>
-    <lastmod>2024-07-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.urbanroot.fr/espace-jardinage</loc>
-    <lastmod>2024-07-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.urbanroot.fr/faq</loc>
-    <lastmod>2024-07-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.urbanroot.fr/login</loc>
-    <lastmod>2024-07-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.urbanroot.fr/maintenance</loc>
-    <lastmod>2024-07-15</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.1</priority>
-  </url>
-  <url>
-    <loc>https://www.urbanroot.fr/mentionslegales</loc>
-    <lastmod>2024-07-15</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.urbanroot.fr/politiqueconfidentialite</loc>
-    <lastmod>2024-07-15</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.urbanroot.fr/register</loc>
-    <lastmod>2024-07-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
+<url>
+<loc>https://urbanroot-d388a0ae64e1.herokuapp.com/</loc>
+</url>
+<url>
+<loc>https://urbanroot-d388a0ae64e1.herokuapp.com/articles/composter-milieu-urbain</loc>
+</url>
+<url>
+<loc>https://urbanroot-d388a0ae64e1.herokuapp.com/articles/conseils-potager-urbain</loc>
+</url>
+<url>
+<loc>https://urbanroot-d388a0ae64e1.herokuapp.com/articles/decouvrez-bakougie</loc>
+</url>
+<url>
+<loc>https://urbanroot-d388a0ae64e1.herokuapp.com/articles/jardiner-balcon-astuces</loc>
+</url>
+<url>
+<loc>https://urbanroot-d388a0ae64e1.herokuapp.com/articles/outils-jardinage-urbain</loc>
+</url>
+<url>
+<loc>https://urbanroot-d388a0ae64e1.herokuapp.com/articles/plantes-jardin-urbain</loc>
+</url>
+<url>
+<loc>https://urbanroot-d388a0ae64e1.herokuapp.com/blog</loc>
+</url>
+<url>
+<loc>https://urbanroot-d388a0ae64e1.herokuapp.com/contact</loc>
+</url>
+<url>
+<loc>https://urbanroot-d388a0ae64e1.herokuapp.com/espace-communautaire</loc>
+</url>
+<url>
+<loc>https://urbanroot-d388a0ae64e1.herokuapp.com/espace-jardinage</loc>
+</url>
+<url>
+<loc>https://urbanroot-d388a0ae64e1.herokuapp.com/faq</loc>
+</url>
+<url>
+<loc>https://urbanroot-d388a0ae64e1.herokuapp.com/loading</loc>
+</url>
+<url>
+<loc>https://urbanroot-d388a0ae64e1.herokuapp.com/login</loc>
+</url>
+<url>
+<loc>https://urbanroot-d388a0ae64e1.herokuapp.com/maintenance</loc>
+</url>
+<url>
+<loc>https://urbanroot-d388a0ae64e1.herokuapp.com/mentionslegales</loc>
+</url>
+<url>
+<loc>https://urbanroot-d388a0ae64e1.herokuapp.com/politiqueconfidentialite</loc>
+</url>
+<url>
+<loc>https://urbanroot-d388a0ae64e1.herokuapp.com/register</loc>
+</url>
 </urlset>

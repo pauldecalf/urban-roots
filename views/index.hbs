@@ -1,35 +1,3 @@
-
-{{!-- Un message dans votre boîte mail attire votre attention :
-
-Objet : Demande de collaboration pour le développement de la plateforme UrbanRoots
-
-Bonjour,
-J'espère que vous allez bien. Je me permets de vous contacter car nous recherchons un prestataire
-capable de nous accompagner dans le développement de notre nouvelle plateforme, UrbanRoots,
-dédiée au jardinage urbain collaboratif.
-Nous souhaitons intégrer les fonctionnalités suivantes :
-Une carte interactive pour localiser et créer des espaces de jardinage
-Une plateforme d'échanges pour partager ressources et conseils
-Des forums communautaires pour discussions et organisation d'événements
-Des modules éducatifs sur le jardinage urbain
-Un outil de suivi environnemental pour mesurer les impacts des actions des utilisateurs
-Permettre la recherche et intégrer un système de filtrage selon divers critères (catégorie,
-distance, valeur estimée, etc.)
-Proposer un système d'évaluation des échanges et des utilisateurs
-Nous privilégions les propositions qui mettent en avant une démarche éco-responsable et
-communautaire tout au long du développement du projet.
-Merci d'avance pour votre proposition.
-
-Cordialement,
-
-L'équipe du projet "Troc éco-responsable"
-
-Après avoir pris connaissance du message, vous décidez de participer à cet appel d'offres. Vous
-prévoyez que le projet prendra environ 3 mois pour un coût de 16 500€, en garantissant une réalisation
-éthique et respectueuse de l'environnement. --}}
-
-
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -67,7 +35,7 @@ prévoyez que le projet prendra environ 3 mois pour un coût de 16 500€, en ga
         </a>
         <div class="hidden xl:flex menu-desktop">
             <a href="/espace-jardinage" class="desktop-navlink">Espace jardinage</a>
-            <a href="/espace-communautaire" class="desktop-navlink">Espace communautaire</a>
+            <a href="/espace-communautaire" class="desktop-navlink" >Espace communautaire</a>
             <a href="/blog" class="desktop-navlink">Modules éducatifs</a>
             <a href="/faq" class="desktop-navlink">FAQ</a>
             <a href="/contact" class="desktop-navlink">Contact</a>
@@ -78,6 +46,7 @@ prévoyez que le projet prendra environ 3 mois pour un coût de 16 500€, en ga
         <img src="/img/fi-rr-menu-burger.svg" alt="menu-burger" id="burger-icon">
     </div>
 </header>
+<div id="content-area"></div>
 <main>
     <!-- Fullscreen menu -->
     <nav id="fullscreen-menu" class="fixed inset-0 hidden z-40">
@@ -116,8 +85,72 @@ prévoyez que le projet prendra environ 3 mois pour un coût de 16 500€, en ga
         </div>
     </div>
 
+
+
+    {{#if successMessage}}
+        <style>
+            .bd-example>.alert+.alert, .bd-example>.nav+.nav, .bd-example>.navbar+.navbar, .bd-example>.progress+.btn, .bd-example>.progress+.progress {
+                margin-top: 1rem;
+            }
+            .alert-success {
+                color: #155724;
+                background-color: #d4edda;
+                border-color: #c3e6cb;
+
+            }
+            .alert {
+                position: relative;
+                padding: .75rem 1.25rem;
+                margin-bottom: 1rem;
+                border: 1px solid transparent;
+                border-radius: .25rem;
+            }
+            .close:not(:disabled):not(.disabled) {
+                cursor: pointer;
+            }
+            .alert-dismissible .close {
+                position: absolute;
+                top: 0;
+                right: 0;
+                padding: .75rem 1.25rem;
+                color: inherit;
+            }
+            button.close {
+                padding: 0;
+                background-color: transparent;
+                border: 0;
+                -webkit-appearance: none;
+            }
+            [type=reset], [type=submit], button, html [type=button] {
+                -webkit-appearance: button;
+            }
+            .close {
+                float: right;
+                font-size: 1.5rem;
+                font-weight: 700;
+                line-height: 1;
+                color: #000;
+                text-shadow: 0 1px 0 #fff;
+                opacity: .5;
+            }
+        </style>
+        <br><br>
+        <div class="alert alert-success alert-dismissible fade show m-12" role="alert">
+            <strong>{{successMessage}}</strong> Vous pouvez désormais accéder à l'ensemble des fonctionnalités de la plateforme.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    {{/if}}
+
+
+
         <!-- Hero section -->
         <div id="hero" class="md:flex first-div-top">
+
             <div id="left" class="hero-content">
                 <div>
                     <h1 class="display-title">

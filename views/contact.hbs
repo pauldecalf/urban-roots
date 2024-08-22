@@ -1,37 +1,3 @@
-
-{{!-- Un message dans votre boîte mail attire votre attention :
-
-Objet : Demande de collaboration pour le développement de la plateforme UrbanRoots
-
-Bonjour,
-J'espère que vous allez bien. Je me permets de vous contacter car nous recherchons un prestataire
-capable de nous accompagner dans le développement de notre nouvelle plateforme, UrbanRoots,
-dédiée au jardinage urbain collaboratif.
-Nous souhaitons intégrer les fonctionnalités suivantes :
-Une carte interactive pour localiser et créer des espaces de jardinage
-Une plateforme d'échanges pour partager ressources et conseils
-Des forums communautaires pour discussions et organisation d'événements
-Des modules éducatifs sur le jardinage urbain
-Un outil de suivi environnemental pour mesurer les impacts des actions des utilisateurs
-Permettre la recherche et intégrer un système de filtrage selon divers critères (catégorie,
-distance, valeur estimée, etc.)
-Proposer un système d'évaluation des échanges et des utilisateurs
-Nous privilégions les propositions qui mettent en avant une démarche éco-responsable et
-communautaire tout au long du développement du projet.
-Merci d'avance pour votre proposition.
-
-Cordialement,
-
-L'équipe du projet "Troc éco-responsable"
-
-Après avoir pris connaissance du message, vous décidez de participer à cet appel d'offres. Vous
-prévoyez que le projet prendra environ 3 mois pour un coût de 16 500€, en garantissant une réalisation
-éthique et respectueuse de l'environnement.
-
-PAGE / faq  --}}
-
-
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -69,10 +35,10 @@ PAGE / faq  --}}
         </a>
         <div class="hidden xl:flex menu-desktop">
             <a href="/espace-jardinage" class="desktop-navlink">Espace jardinage</a>
-            <a href="/espace-communautaire" class="desktop-navlink">Espace communautaire</a>
+            <a href="/espace-communautaire" class="desktop-navlink" >Espace communautaire</a>
             <a href="/blog" class="desktop-navlink">Modules éducatifs</a>
             <a href="/faq" class="desktop-navlink">FAQ</a>
-            <a href="/contact" class="desktop-navlink  activ-nav">Contact</a>
+            <a href="/contact" class="desktop-navlink activ-nav">Contact</a>
         </div>
     </div>
 
@@ -80,8 +46,9 @@ PAGE / faq  --}}
         <img src="/img/fi-rr-menu-burger.svg" alt="menu-burger" id="burger-icon">
     </div>
 </header>
+<div id="content-area"></div>
 <main>
-<!-- Fullscreen menu -->
+    <!-- Fullscreen menu -->
     <nav id="fullscreen-menu" class="fixed inset-0 hidden z-40">
         <div>
             <a href="/espace-jardinage">Espace jardinage</a>

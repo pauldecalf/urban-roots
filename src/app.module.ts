@@ -1,23 +1,26 @@
-import { Module, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
+import { Module, MiddlewareConsumer } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { join } from 'path';
 import { AppService } from './app.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { MongooseModule } from "@nestjs/mongoose";
 import { ArticlesModule } from './articles/articles.module';
 import { UtilisateursModule } from "./utilisateurs/utilisateurs.module";
-import { FamillesModule } from "./familles/familles.module";
-import { ReglesModule } from "./regles/regles.module";
-import { PrisedeconnaissanceModule } from "./prisedeconnaissance/prisedeconnaissance.module";
-import { MoodboardModule } from "./moodboard/moodboard.module";
-import { TachesModule } from "./taches/taches.module";
-import { ActivitesModule } from "./activites/activites.module";
+import { PublicationsModule } from "./publications/publications.module";
+import { CommentaireModule } from "./commentaire/commentaire.module";  // Import du module des commentaires
+import { LikePublicationModule } from "./likePublication/likePublication.module";
+import { LikeCommentaireModule } from "./likeCommentaire/likeCommentaire.module";
+import { CategorieModule } from "./categorie/categorie.module";
 import { AuthService } from "./auth.service";
 import { ConfigModule } from "@nestjs/config";
 import { JwtModule } from '@nestjs/jwt';
-import { JwtAuthGuard } from './jwt-auth.guard'; // Assurez-vous que ce chemin est correct
-import { AuthMiddleware } from './auth.middleware';
+import { JwtAuthGuard } from './jwt-auth.guard';
+import * as cookieParser from 'cookie-parser';
 import { JardinsModule } from './jardins/jardins.module';
+import { PassportModule } from '@nestjs/passport';
+import { JwtStrategy } from "./jwt.strategy";
+import { UploadModule } from "./upload/upload.module";
+import { join } from 'path';  // Assurez-vous que l'import de `join` est présent ici
+
 @Module({
   imports: [
     ServeStaticModule.forRoot({
@@ -27,29 +30,30 @@ import { JardinsModule } from './jardins/jardins.module';
     MongooseModule.forRoot('mongodb+srv://admin:admin@atlascluster.vfolo9m.mongodb.net/UrbanRoot'),
     ArticlesModule,
     UtilisateursModule,
-    FamillesModule,
-    ReglesModule,
-    PrisedeconnaissanceModule,
-    MoodboardModule,
-    TachesModule,
-    ActivitesModule,
     JardinsModule,
+    PublicationsModule,
+    CommentaireModule,
+    LikeCommentaireModule,
+    LikePublicationModule,
+    CategorieModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    UploadModule,
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
-      secret: process.env.JWT_SECRET || 'default-secret', // Remplacez par votre clé secrète
+      secret: process.env.JWT_SECRET || 'default-secret',
       signOptions: { expiresIn: '1h' },
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, AuthService, JwtAuthGuard],
+  providers: [AppService, AuthService, JwtAuthGuard, JwtStrategy],
+  exports: [AuthService],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(AuthMiddleware)
-      .forRoutes(
-      );
+        .apply(cookieParser())  // Utilisation correcte de `apply`
+        .forRoutes('*'); // Applique le middleware à toutes les routes
   }
 }

@@ -1,62 +1,45 @@
 function handleRegister(event) {
     event.preventDefault();
+
     const prenom = document.getElementById('prenom-input').value;
+    const nom = document.getElementById('nom-input').value;
     const email = document.getElementById('email-input').value;
     const password = document.getElementById('password-input').value;
+    const genre = document.querySelector('input[name="genre"]:checked').value;
+    const imgProfil = document.getElementById('profile-picture').files[0];
 
     // Validation simplifiée des champs de formulaire
-    if (!prenom || !email || !password) {
+    if (!prenom || !nom || !email || !password || !genre || !imgProfil) {
         document.getElementById('message').innerText = 'Tous les champs sont obligatoires.';
         return;
     }
 
+    // Créer un objet FormData pour inclure les données du formulaire et le fichier
+    const formData = new FormData();
+    formData.append('prenom', prenom);
+    formData.append('nom', nom);
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('genre', genre);
+    formData.append('imgProfil', imgProfil);
+
+    // Envoyer la requête POST avec FormData
     fetch('/register', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ prenom, email, password })
+        body: formData
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.message === 'Inscription réussie') {
-            sessionStorage.setItem('prenom', data.user.prenom);  // Stocker le prénom dans sessionStorage
-            sessionStorage.setItem('nom', data.user.nom);        // Stocker le nom dans sessionStorage
-            sessionStorage.setItem('email', data.user.email);    // Stocker l'email dans sessionStorage
-            window.location.href = '/family-setup';
-        } else {
-            document.getElementById('message').innerText = data.message;
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        document.getElementById('message').innerText = 'Une erreur est survenue. Veuillez réessayer plus tard.';
-    });
-}
-
-function handleCredentialResponse(response) {
-    fetch('/register/google', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ idToken: response.credential })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.message === 'Connexion réussie' || data.message === 'Inscription réussie avec Google') {
-            sessionStorage.setItem('prenom', data.user.prenom);  // Stocker le prénom dans sessionStorage
-            sessionStorage.setItem('nom', data.user.nom);        // Stocker le nom dans sessionStorage
-            sessionStorage.setItem('email', data.user.email);    // Stocker l'email dans sessionStorage
-            window.location.href = '/family-setup';
-        } else {
-            document.getElementById('message').innerText = data.message;
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        document.getElementById('message').innerText = 'Une erreur est survenue. Veuillez réessayer plus tard.';
-    });
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === 'Inscription réussie') {
+                window.location.href = '/?success=Inscription%20réussie';
+            } else {
+                document.getElementById('message').innerText = data.message;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('message').innerText = 'Une erreur est survenue. Veuillez réessayer plus tard.';
+        });
 }
 
 function checkInputs() {
@@ -91,17 +74,31 @@ document.getElementById('prenom-input').addEventListener('input', checkInputs);
 document.getElementById('email-input').addEventListener('input', checkInputs);
 document.getElementById('password-input').addEventListener('input', checkInputs);
 
-if (!navigator.cookieEnabled) {
-document.getElementById('message').innerText = 'Les cookies sont désactivés dans votre navigateur. Veuillez les activer pour utiliser l\'authentification Google.';
-}
 
-document.addEventListener('DOMContentLoaded', (event) => {
-// Vérifiez si un script Google n'est pas chargé
-const googleSignInButton = document.querySelector('.g_id_signin');
-if (!googleSignInButton) {
-  const messageDiv = document.createElement('div');
-  messageDiv.style.color = 'red';
-  messageDiv.innerText = 'Il semble qu\'un bloqueur de publicités ou un autre logiciel de blocage empêche certaines fonctionnalités de fonctionner correctement. Veuillez désactiver ces extensions pour ce site.';
-  document.body.prepend(messageDiv);
-}
+
+
+
+
+document.getElementById('profile-picture').addEventListener('change', function(event) {
+    const input = event.target;
+    const preview = document.getElementById('profile-picture-preview');
+
+    // Vérifie si un fichier est sélectionné
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+
+        // Lorsque le fichier est chargé
+        reader.onload = function(e) {
+            // Met à jour la source de l'image et affiche la prévisualisation
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+        }
+
+        // Lire le fichier sélectionné comme une URL de données
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        // Si aucun fichier n'est sélectionné, cacher la prévisualisation
+        preview.style.display = 'none';
+        preview.src = '';
+    }
 });

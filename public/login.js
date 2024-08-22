@@ -50,7 +50,7 @@ function handleLogin(event) {
             sessionStorage.setItem('prenom', data.user.prenom);  // Stocker le prénom dans sessionStorage
             sessionStorage.setItem('nom', data.user.nom);        // Stocker le nom dans sessionStorage
             sessionStorage.setItem('email', data.user.email);    // Stocker l'email dans sessionStorage
-            window.location.href = '/dashboard';
+            window.location.href = '/';
         } else {
             document.getElementById('message').innerText = data.message;
         }
@@ -65,26 +65,24 @@ function handleCredentialResponse(response) {
     fetch('/login/google', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ idToken: response.credential })
+        body: JSON.stringify({ idToken: response.credential }),
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.message === 'Connexion réussie' || data.message === 'Inscription réussie avec Google') {
-            sessionStorage.setItem('prenom', data.user.prenom);  // Stocker le prénom dans sessionStorage
-            sessionStorage.setItem('nom', data.user.nom);        // Stocker le nom dans sessionStorage
-            sessionStorage.setItem('email', data.user.email);    // Stocker l'email dans sessionStorage
-            window.location.href = '/dashboard';
-        } else {
-            document.getElementById('message').innerText = data.message;
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        document.getElementById('message').innerText = 'Une erreur est survenue. Veuillez réessayer plus tard.';
-    });
+        .then(response => response.json())
+        .then(data => {
+            console.log('Réponse du serveur:', data);  // Debug: Vérifiez ce qui est renvoyé par le serveur
+            window.location.href = '/?success=Connexion effectué avec succès';
+
+        })
+        .catch(error => {
+            console.error('Erreur de connexion:', error);
+            document.getElementById('message').innerText = 'Une erreur est survenue. Veuillez réessayer plus tard.';
+        });
 }
+
+
+
 
 if (!navigator.cookieEnabled) {
 document.getElementById('message').innerText = 'Les cookies sont désactivés dans votre navigateur. Veuillez les activer pour utiliser l\'authentification Google.';

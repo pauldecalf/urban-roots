@@ -4,15 +4,7 @@ import { Injectable } from '@nestjs/common';
 export class AppService {
   constructor() {}
 
-
-
-  getHome() {};
-
   getContact() {}
-
-  getBlog() {}
-
-  getArticle() {}
 
   getMaintenance() {}
 
@@ -21,41 +13,7 @@ export class AppService {
   getPolitiqueConfidentialite() {}
 
   getFaq() {}
-
-  getError() {}
-
-  getAccueil() {}
-
   getInscription() {}
 
   getLogin() {}
-
-  getLoading() {}
-
-  getFamilySetup() {}
-
-  getCreateFamily() {}
-
-  getFamilyInvitation() {}
-
-  getChoixRole() {}
-
-  getSuccessRegister() {}
-
-  getJoinFamily() {}
-
-  getDashboard() {}
-
-  getProfil() {}
-
-  geProfilOnboarding() {}
-
-  geProfilOnboarding2() {}
-
-  geProfilOnboarding3() {}
-
-  getEspaceJardinage() {}
-
-  getEspaceCommunautaire() {}
-
 }

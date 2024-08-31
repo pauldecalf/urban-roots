@@ -16,7 +16,8 @@ export class PublicationsService {
     }
 
     async findAll(): Promise<Publications[]> {
-        return this.publicationsModel.find().exec();
+        // Utilise la méthode qui récupère également les commentaires
+        return this.findAllWithComments();
     }
 
     async findOne(id: string): Promise<Publications> {
@@ -34,4 +35,9 @@ export class PublicationsService {
             { new: true, useFindAndModify: false }
         ).exec();
     }
+
+    async findAllWithComments(): Promise<Publications[]> {
+        return this.publicationsModel.find().populate('commentaires').exec();
+    }
+
 }

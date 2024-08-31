@@ -148,7 +148,6 @@
         </a>
 {{/if}}
 
-
         {{#each publications}}
             <div class="flex flex-col post p-8 rounded-xl w-fill-available gap-5">
                 <h2 class="heading4">{{titre}}</h2>
@@ -189,9 +188,9 @@
                             </button>
                         </div>
                         <div class="flex items-center gap-4">
-                            <button id="ajouter-une-reponse" class="p-3 flex gap-5 cta-column-left rounded-xl fit-content">
+                            <button class="ajouter-une-reponse p-3 flex gap-5 cta-column-left rounded-xl fit-content">
                                 <i class="fi fi-rr-comment"></i>
-                                Ajouter une commentaire
+                                Ajouter un commentaire
                             </button>
                         </div>
                     </div>
@@ -205,13 +204,13 @@
                         <div class="flex items-center gap-4">
                             <a href="/login" class="p-3 flex gap-5 cta-column-left rounded-xl fit-content">
                                 <i class="fi fi-rr-comment"></i>
-                                Ajouter une réponse
+                                Ajouter un commentaire
                             </a>
                         </div>
                     </div>
                 {{/if}}
                 <!-- Formulaire pour ajouter un commentaire -->
-                <div class="flex flex-col hidden post p-8 rounded-xl w-full gap-5 " id="ecrire-une-reponse">
+                <div class="flex flex-col hidden post p-8 rounded-xl w-full gap-5 reponseDiv">
                     <p>Rédaction d'un commentaire</p>
                     <form action="commentaire/comment" method="post">
                         <!-- Champ caché pour stocker l'ID de la publication -->
@@ -228,6 +227,7 @@
                         </div>
                     </form>
                 </div>
+
             </div>
         {{/each}}
 
@@ -236,19 +236,23 @@
 
 
 <script>
-        document.getElementById('ajouter-une-reponse').addEventListener('click', function() {
-            let ajouterunereponse = document.getElementById('ajouter-une-reponse');
-            let reponseDiv = document.getElementById('ecrire-une-reponse');
+    // Sélectionne tous les boutons avec la classe 'ajouter-une-reponse'
+    document.querySelectorAll('.ajouter-une-reponse').forEach(button => {
+        button.addEventListener('click', function() {
+            // Sélectionne le formulaire de réponse associé au bouton cliqué
+            const reponseDiv = this.closest('.post').querySelector('.reponseDiv');
             if (reponseDiv.classList.contains('hidden')) {
                 reponseDiv.classList.remove('hidden');
-                ajouterunereponse.style.backgroundColor = '#E6E2FB';
-                
+                this.style.backgroundColor = '#E6E2FB';
             } else {
                 reponseDiv.classList.add('hidden');
-                ajouterunereponse.style.backgroundColor = '#ECECEC';
+                this.style.backgroundColor = '#ECECEC';
             }
         });
-    </script>
+    });
+
+
+</script>
 
 
 

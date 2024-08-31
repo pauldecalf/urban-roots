@@ -24,15 +24,13 @@ export class CommentaireService {
         return this.commentaireModel.findById(id).exec();
     }
 
-    // Méthode pour trouver des commentaires par publication (si nécessaire)
+    // Méthode pour trouver des commentaires par publicationId
     async findByPublicationId(publicationId: string): Promise<Commentaire[]> {
-        return this.commentaireModel.find({ publication: publicationId }).exec();
-    }
-
-    // Méthode pour récupérer tous les commentaires d'une publication
-    async getAllCommentairesWithPublicationId(publicationId: string): Promise<Commentaire[]> {
         return this.commentaireModel.find({ publicationId }).exec();
     }
 
-
+    // Méthode pour trouver des commentaires par publicationId avec la publication liée (si nécessaire)
+    async findByPublicationIdWithPopulate(publicationId: string): Promise<Commentaire[]> {
+        return this.commentaireModel.find({ publicationId }).populate('publicationId').exec();
+    }
 }

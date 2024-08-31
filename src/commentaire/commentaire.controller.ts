@@ -23,10 +23,16 @@ export class CommentaireController {
         @Res() response: Response,
     ) {
         try {
-            const cookies = (req as any).cookies;
-            const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdvcmlsbGVtb2QxMjRAZ21haWwuY29tIiwic3ViIjoiNjZjNWFiZmZiOTAxMjM2ODViNzFlM2JiIiwicHJlbm9tIjoiUGF1bCIsIm5vbSI6IkRlY2FsZiIsImlhdCI6MTcyNDMyNzM0MiwiZXhwIjoxNzI0MzMwOTQyfQ.WJ4pAZHK2WSy5y4b2-XB7amf6GyTiBa89tbl-KXyJQQ";
-            if (!token) {
-                return response.status(HttpStatus.UNAUTHORIZED).json({ message: 'Vous devez être connecté pour poster un commentaire.' });
+            const token = req.cookies?.jwt;
+            let user = null;
+            if (token) {
+                try {
+                    // Vérifie et décode le token JWT
+                    user = this.jwtService.verify(token);
+                    console.log('Utilisateur décodé - Test:', user);  // Vous devriez maintenant voir "prenom" et "nom"
+                } catch (err) {
+                    return response.status(HttpStatus.UNAUTHORIZED).json({ message: 'Vous devez être connecté pour poster un commentaire.' });
+                }
             }
 
             let decoded;
@@ -52,8 +58,6 @@ export class CommentaireController {
             await this.publicationsService.addComment(createCommentaireDto.publicationId, commentaire._id);
             console.log('Commentaire:', commentaire);
             console.log('Created At:', new Date(commentaire.createdAt));
-
-            return response.status(HttpStatus.CREATED).json({ message: 'Commentaire posté avec succès.' });
         } catch (error) {
             console.error('Error posting comment:', error);
             return response.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Une erreur est survenue lors de la soumission du commentaire.' });

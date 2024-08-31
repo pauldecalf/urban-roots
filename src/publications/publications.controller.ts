@@ -14,6 +14,9 @@ export class PublicationsController {
 
     @Get()
     async findAll(): Promise<Publications[]> {
+        // Pour chacune des publication il faut récupérer les commentaires ayant pour publicationId le _id de la publication
+
+
         return this.publicationsService.findAll();
     }
 

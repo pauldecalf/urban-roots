@@ -323,7 +323,7 @@ async getEspaceJardinage() {
             try {
                 // Vérifie et décode le token JWT
                 user = this.jwtService.verify(token);
-                console.log('Utilisateur décodé:', user);  // Vous devriez maintenant voir "prenom" et "nom"
+                console.log('Utilisateur décodé - Test:', user);  // Vous devriez maintenant voir "prenom" et "nom"
             } catch (err) {
                 console.log('Token invalide ou expiré');
             }
@@ -332,6 +332,7 @@ async getEspaceJardinage() {
         // Renvoie les informations utilisateur (null si non connecté) à la vue
         const publications = await this.publicationsService.findAll(); // Exemple de récupération des publications
 
+        console.log('Publications:', publications);  // Ajout de la ligne de log
         return { user, publications };
     }
 

@@ -58,6 +58,9 @@ export class CommentaireController {
             await this.publicationsService.addComment(createCommentaireDto.publicationId, commentaire._id);
             console.log('Commentaire:', commentaire);
             console.log('Created At:', new Date(commentaire.createdAt));
+
+            // On return sur la meme page avec un ?success_commentaire=true
+            return response.redirect(`/espace-communautaire?success_commentaire=true`);
         } catch (error) {
             console.error('Error posting comment:', error);
             return response.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Une erreur est survenue lors de la soumission du commentaire.' });

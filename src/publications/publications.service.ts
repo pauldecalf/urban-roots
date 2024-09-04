@@ -37,7 +37,18 @@ export class PublicationsService {
     }
 
     async findAllWithComments(): Promise<Publications[]> {
-        return this.publicationsModel.find().populate('commentaires').exec();
+        return this.publicationsModel
+            .find()
+            .populate({
+                path: 'commentaires',
+                populate: {
+                    path: 'createdBy',  // Populate l'utilisateur qui a créé le commentaire
+                    // On récupére l'email et le imgProfil
+                    select: 'prenom imgProfil',
+
+                },
+            })
+            .exec();
     }
 
 }

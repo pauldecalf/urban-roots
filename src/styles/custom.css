@@ -2093,7 +2093,10 @@ nav div{
             background: #2F2F2F;
         }
         .register-section{
-            margin: 20px 16px;
+            background: var(--Color-Neutral-White-100, #FFF);
+            padding: 15px;
+            border-radius: 16px;
+            box-shadow: 0px 0px 20px 7px rgba(0, 0, 0, 0.25)
         }
 
         .register-section h1{
@@ -3878,3 +3881,29 @@ nav div{
                 display: block;
             }
         }
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+.alert {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+.fade.show {
+    opacity: 1;
+}
+.alert-dismissible {
+    padding-right: 4rem;
+}
+.alert {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}

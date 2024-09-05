@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connectez-vous dès maintenant - Urban-Roots</title>
+    <title>Connexion - Urban-Roots</title>
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Accédez à votre compte Urban-Roots et rejoignez notre communauté de jardiniers urbains. Connectez-vous dès maintenant pour partager et découvrir des ressources de jardinage.">
+    <meta name="description" content="Connectez-vous à votre espace personnel Urban-Roots et profitez de toutes les fonctionnalités de l'application.">
     <meta name="author" content="Urban-Roots">
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Connectez-vous dès maintenant - Urban-Roots">
-    <meta property="og:description" content="Accédez à votre compte Urban-Roots et rejoignez notre communauté de jardiniers urbains. Connectez-vous dès maintenant pour partager et découvrir des ressources de jardinage.">
+    <meta property="og:title" content="Connexion - Urban-Roots">
+    <meta property="og:description" content="Connectez-vous à votre espace personnel Urban-Roots et profitez de toutes les fonctionnalités de l'application.">
     <meta property="og:image" content="/img/Hero-Image.svg">
     <meta property="og:url" content="https://www.urbanroot.fr/login">
     <meta property="og:type" content="website">
@@ -23,52 +23,112 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.4.2/uicons-regular-rounded/css/uicons-regular-rounded.css">
+
     <!-- Google Identity Services -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 
 <body>
-<main >
-    <section class="register-section">
-        <!-- Bouton pour revenir en arrière -->
-        <a href="/" class="cta-back-to-loading">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M11.29 17.71C11.3837 17.617 11.4581 17.5064 11.5089 17.3846C11.5597 17.2627 11.5858 17.132 11.5858 17C11.5858 16.868 11.5597 16.7373 11.5089 16.6154C11.4581 16.4936 11.3837 16.383 11.29 16.29L8 13L18 13C18.2652 13 18.5196 12.8946 18.7071 12.7071C18.8946 12.5196 19 12.2652 19 12C19 11.7348 18.8946 11.4804 18.7071 11.2929C18.5196 11.1054 18.2652 11 18 11L8 11L11.29 7.71C11.3837 7.61704 11.4581 7.50644 11.5089 7.38458C11.5597 7.26272 11.5858 7.13201 11.5858 7C11.5858 6.86799 11.5597 6.73728 11.5089 6.61542C11.4581 6.49356 11.3837 6.38296 11.29 6.29C11.1026 6.10375 10.8492 5.99921 10.585 5.99921C10.3208 5.99921 10.0674 6.10375 9.88 6.29L5.59 10.59C5.21441 10.9634 5.00223 11.4704 5 12C5.00486 12.5261 5.21684 13.0291 5.59 13.4L9.88 17.7C10.066 17.8876 10.3187 17.9939 10.5829 17.9958C10.8471 17.9977 11.1013 17.8949 11.29 17.71Z" fill="white"/>
-            </svg>
+
+<!-- Header -->
+<header id="header" class=" flex fixed top-0 left-0 w-full z-50">
+    <div class="header-desktop">
+        <a href="/">
+            <p class="heading3">Urban-Roots</p>
         </a>
+        <div class="hidden xl:flex menu-desktop">
+            <a href="/espace-jardinage" class="desktop-navlink">Espace jardinage</a>
+            <a href="/espace-communautaire" class="desktop-navlink" >Espace communautaire</a>
+            <a href="/blog" class="desktop-navlink">Modules éducatifs</a>
+            <a href="/faq" class="desktop-navlink">FAQ</a>
+            <a href="/contact" class="desktop-navlink">Contact</a>
+        </div>
+    </div>
 
-        <h1>Connectez-vous !</h1>
+    <div id="menu-burger" class="xl:hidden">
+        <img src="/img/fi-rr-menu-burger.svg" alt="menu-burger" id="burger-icon">
+    </div>
+</header>
+<div id="content-area"></div>
+<main>
+    <!-- Fullscreen menu -->
+    <nav id="fullscreen-menu" class="fixed inset-0 hidden z-40">
+        <div>
+            <a href="/espace-jardinage">Espace jardinage</a>
+            <a href="/espace-communautaire">Espace communautaire</a>
+            <a href="/blog">Modules éducatifs</a>
+            <a href="/faq">FAQ</a>
+            <a href="/contact">Contact</a>
+        </div>
+    </nav>
 
-        <p id="message"></p>
-        <form class="login-form-email" onsubmit="handleLogin(event)">
-            <input id="email-input" class="register-input" type="text" name="email" placeholder="Adresse email*" autocomplete="username">
-            <input id="password-input" class="register-input" type="password" name="password" placeholder="Mot de passe*" autocomplete="current-password">
-            <p id="password-instructions" class="register-instructions-password">Contient au minimum 8 caractères</p>
-            <button id="login-button" type="submit" class="cta-register-lock" disabled>Je me connecte</button>
+    <!-- Popup -->
+    <div id="popup-overlay" class="fixed inset-0 hidden z-50 flex items-center justify-center">
+        <div id="popup" class="nl-signup">
+            <div class="popup-close">
+                <div class="p-2 rounded-xl	">
+                    <img src="/img/close-svgrepo-com.svg" id="close-popup" class=" cursor-pointer w-6 h-6" alt="icon close popup">
+                </div>
+            </div>
+            <h3 class="heading3">
+                Inscrivez-vous dès aujourd'hui et soyez les premiers informés !
+            </h3>
+            <p>Soyez les premiers informés et profitez d'un accès exclusif en avant-première !</p>
+            <form action="https://app.us17.list-manage.com/subscribe/post?u=6bb0a21d1079de766e0f857a5&amp;id=d799be0915&amp;f_id=0008e1e3f0" method="post" name="mc-embedded-subscribe-form" target="_blank">
+                <div class="signup-form">
+                    <input placeholder="Entrez votre adresse e-mail" type="email" name="EMAIL" id="mce-EMAIL" required>
+                    <div class="response hidden" id="mce-error-response"></div>
+                    <div class="response hidden" id="mce-success-response"></div>
+                    <button type="submit" name="subscribe" class="cta-lg primary-cta">
+                        <span>Je m'inscris</span>
+                        <img src="/img/arrow-right-svgrepo-com.svg" class="w-6 h-6" alt="arrow-right">
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
-            <a href="/maintenance" class="login-p-forgot-password">
-                Mot de passe oublié ?
+    <section class="flex justify-center mt-28 mb-5">
+        <div class="register-section">
+            <!-- Bouton pour revenir en arrière -->
+            <a href="/" class="cta-back-to-loading">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M11.29 17.71C11.3837 17.617 11.4581 17.5064 11.5089 17.3846C11.5597 17.2627 11.5858 17.132 11.5858 17C11.5858 16.868 11.5597 16.7373 11.5089 16.6154C11.4581 16.4936 11.3837 16.383 11.29 16.29L8 13L18 13C18.2652 13 18.5196 12.8946 18.7071 12.7071C18.8946 12.5196 19 12.2652 19 12C19 11.7348 18.8946 11.4804 18.7071 11.2929C18.5196 11.1054 18.2652 11 18 11L8 11L11.29 7.71C11.3837 7.61704 11.4581 7.50644 11.5089 7.38458C11.5597 7.26272 11.5858 7.13201 11.5858 7C11.5858 6.86799 11.5597 6.73728 11.5089 6.61542C11.4581 6.49356 11.3837 6.38296 11.29 6.29C11.1026 6.10375 10.8492 5.99921 10.585 5.99921C10.3208 5.99921 10.0674 6.10375 9.88 6.29L5.59 10.59C5.21441 10.9634 5.00223 11.4704 5 12C5.00486 12.5261 5.21684 13.0291 5.59 13.4L9.88 17.7C10.066 17.8876 10.3187 17.9939 10.5829 17.9958C10.8471 17.9977 11.1013 17.8949 11.29 17.71Z" fill="white"/>
+                </svg>
             </a>
-        </form>
-        <p class="register-separator">ou</p>
+            <h1>Connectez-vous !</h1>
 
-      <div id="g_id_onload"
-           data-client_id="371895287520-lrj5mitr2daek1ds5oon566kbi4jjhd4.apps.googleusercontent.com"
-           data-context="signin"
-           data-ux_mode="popup"
-           data-callback="handleCredentialResponse"
-           data-auto_prompt="false">
-      </div>
-      <div class="g_id_signin"
-           data-type="standard"
-           data-shape="rectangular"
-           data-theme="outline"
-           data-text="signin_with"
-           data-size="large">
-      </div>
+            <p id="message"></p>
+            <form class="login-form-email" id="login-form-email">
+                <input id="email-input" class="register-input" type="text" name="email" placeholder="Adresse email*" autocomplete="username">
+                <input id="password-input" class="register-input" type="password" name="password" placeholder="Mot de passe*" autocomplete="current-password">
+                <p id="password-instructions" class="register-instructions-password">Contient au minimum 8 caractères</p>
+                <button id="login-button" type="submit" class="cta-register-lock" disabled>Je me connecte</button>
 
-        <p class="register-p-to-login">Pas de compte ? <a href="/register">Inscrivez-vous !</a></p>
+                <a href="/maintenance" class="login-p-forgot-password">
+                    Mot de passe oublié ?
+                </a>
+            </form>
+            <p class="register-separator">ou</p>
+
+            <div id="g_id_onload"
+                 data-client_id="371895287520-lrj5mitr2daek1ds5oon566kbi4jjhd4.apps.googleusercontent.com"
+                 data-context="signin"
+                 data-ux_mode="popup"
+                 data-callback="handleCredentialResponse"
+                 data-auto_prompt="false">
+            </div>
+            <div class="g_id_signin"
+                 data-type="standard"
+                 data-shape="rectangular"
+                 data-theme="outline"
+                 data-text="signin_with"
+                 data-size="large">
+            </div>
+
+            <p class="register-p-to-login">Pas de compte ? <a href="/register">Inscrivez-vous !</a></p>
+        </div>
 
     </section>
 
@@ -80,7 +140,54 @@
 
 </main>
 
-<script src="../login.js"></script>
+<!-- Footer-->
+<footer>
+    <div>
+        <div class="newsletter-signup">
+            <div class="heading">
+                <p class="home-subheading">
+                    Rejoignez-nous
+                </p>
+                <h2 class="heading2">Prêt à transformer votre jardin en un espace de vie éco-responsable ?</h2>
+            </div>
+            <div class="nl-signup">
+                <p>
+                    Inscrivez-vous à notre newsletter pour recevoir des conseils, des astuces et des ressources sur le jardinage urbain collaboratif.
+                </p>
+                <form action="https://app.us17.list-manage.com/subscribe/post?u=6bb0a21d1079de766e0f857a5&amp;id=d799be0915&amp;f_id=0008e1e3f0" method="post" name="mc-embedded-subscribe-form" target="_blank">
+                    <div class="signup-form">
+                        <input placeholder="Entrez votre adresse e-mail" type="email" name="EMAIL" required>
+                        <button type="submit" name="subscribe" class="cta-lg tonal-cta">
+                            <span id="submit-waitlist-footer" class="plus-jakarta">Je m'inscris</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#FFF">
+                                <path d="M18 11.9996C17.9951 11.4735 17.7832 10.9705 17.41 10.5996L13.12 6.29958C12.9326 6.11333 12.6792 6.00879 12.415 6.00879C12.1508 6.00879 11.8974 6.11333 11.71 6.29958C11.6163 6.39254 11.5419 6.50315 11.4911 6.62501C11.4403 6.74686 11.4142 6.87757 11.4142 7.00958C11.4142 7.14159 11.4403 7.2723 11.4911 7.39416C11.5419 7.51602 11.6163 7.62662 11.71 7.71958L15 10.9996H5C4.73478 10.9996 4.48043 11.1049 4.29289 11.2925C4.10536 11.48 4 11.7344 4 11.9996C4 12.2648 4.10536 12.5192 4.29289 12.7067C4.48043 12.8942 4.73478 12.9996 5 12.9996H15L11.71 16.2896C11.5217 16.4766 11.4154 16.7307 11.4144 16.996C11.4135 17.2614 11.518 17.5163 11.705 17.7046C11.892 17.8929 12.1461 17.9992 12.4115 18.0001C12.6768 18.0011 12.9317 17.8966 13.12 17.7096L17.41 13.4096C17.7856 13.0362 17.9978 12.5292 18 11.9996Z" fill="#FFF"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+                <p class="rgpd-message">
+                    En renseignant votre adresse e-mail, vous acceptez de recevoir la newsletter de Urban-Roots et vous reconnaissez avoir pris connaissance de notre <a href="/politiqueconfidentialite">politique de confidentialité</a>.
+                </p>
+            </div>
+        </div>
+        <div class="copyright-bar">
+            <div class="links">
+                <p>© 2024 Urban-Roots. Tous droits réservés</p>
+                <div class="links">
+                    <a href="/politiqueconfidentialite">Politique de confidentialité</a>
+                    <a href="/mentionslegales">Mentions légales</a>
+                </div>
+            </div>
+            <div class="links">
+                <a target="_blank" href="https://www.facebook.com/"><img class="icon-reseaux" src="/img/icons8-facebook.svg" alt="icon facebook"></a>
+                <a target="_blank" href="https://www.instagram.com/"><img src="/img/icons8-insta.svg" alt="icon instagram" class="icon-reseaux"></a>
+                <a target="_blank" href="https://www.tiktok.com/"><img src="/img/tiktok-svgrepo-com.svg" alt="icon tiktok" class="icon-reseaux"></a>
+                <a target="_blank" href="https://www.youtube.com/"><img src="/img/youtube-168-svgrepo-com.svg" alt="icon tiktok" class="icon-reseaux"></a>
+            </div>
+        </div>
 
+    </div>
+</footer>
+<script src="../login.js"></script>
 </body>
 </html>

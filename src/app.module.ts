@@ -5,9 +5,9 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { MongooseModule } from "@nestjs/mongoose";
 import { ArticlesModule } from './articles/articles.module';
 import { UtilisateursModule } from "./utilisateurs/utilisateurs.module";
+import { LikePublicationModule } from './likePublication/likePublication.module';
 import { PublicationsModule } from "./publications/publications.module";
 import { CommentaireModule } from "./commentaire/commentaire.module";  // Import du module des commentaires
-import { LikePublicationModule } from "./likePublication/likePublication.module";
 import { LikeCommentaireModule } from "./likeCommentaire/likeCommentaire.module";
 import { CategorieModule } from "./categorie/categorie.module";
 import { AuthService } from "./auth.service";
@@ -32,6 +32,7 @@ import { join } from 'path';  // Assurez-vous que l'import de `join` est présen
     UtilisateursModule,
     JardinsModule,
     PublicationsModule,
+    LikePublicationModule,
     CommentaireModule,
     LikeCommentaireModule,
     LikePublicationModule,

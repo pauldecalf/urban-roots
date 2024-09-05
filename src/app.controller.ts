@@ -19,6 +19,7 @@ import { AuthService } from './auth.service';
 import { UtilisateursService } from './utilisateurs/utilisateurs.service';
 import { CreateUtilisateurDto } from './utilisateurs/dto/create-utilisateur.dto';
 import { JardinsService } from './jardins/jardins.service';
+import { LikePublicationService } from './likePublication/likePublication.service';
 import { PublicationsService } from './publications/publications.service';
 import { OAuth2Client } from 'google-auth-library';
 import { config } from 'dotenv';
@@ -51,7 +52,9 @@ export class AppController {
     private readonly jardinsService: JardinsService,
     private readonly publicationsService: PublicationsService,
     private configService: ConfigService,
-    private readonly jwtService: JwtService
+    private readonly jwtService: JwtService,
+               private readonly likePublicationService: LikePublicationService  // Utilisation de la minuscule ici
+
   ) {
     this.client = new OAuth2Client(clientId, clientSecret);
   }
@@ -92,7 +95,7 @@ export class AppController {
     const articles: Article[] = await this.articlesService.findAll();
     return { article, articles };
   }
-  
+
 
   @Get('articles/')
   @Render('maintenance')
@@ -193,18 +196,20 @@ return this.appService.getInscription();
 
     @Post('/login')
     async login(@Body() { email, password }: { email: string, password: string }, @Res() response: Response) {
+      console.log('Tentative de connexion avec email:', email);
         try {
             // Rechercher l'utilisateur par email
             const user = await this.usersService.findOneByEmail(email);
 
             if (!user) {
-                console.error('User not found');
+                console.error(`User not found for email: ${email}`);
                 return response.status(HttpStatus.UNAUTHORIZED).json({ message: 'Email ou mot de passe incorrect' });
             }
 
             // Vérifier si le mot de passe correspond
             const isPasswordMatch = await this.authService.comparePasswords(password, user.password);
             if (!isPasswordMatch) {
+                console.error(`Invalid password for email: ${email}`);
                 return response.status(HttpStatus.UNAUTHORIZED).json({ message: 'Email ou mot de passe incorrect' });
             }
 
@@ -218,8 +223,9 @@ return this.appService.getInscription();
             const token = this.jwtService.sign(jwtPayload);
 
             // Envoyer le token dans un cookie HTTP only et une réponse JSON
+            const isProduction = process.env.NODE_ENV === 'production';
             return response
-                .cookie('jwt', token, { httpOnly: true, secure: true })
+                .cookie('jwt', token, { httpOnly: true, secure: isProduction })
                 .status(HttpStatus.OK)
                 .json({
                     message: 'Connexion réussie',
@@ -236,9 +242,6 @@ return this.appService.getInscription();
         }
     }
 
-
-
-
     @Post('/login/google')
     async loginWithGoogle(@Body() body: { idToken: string }, @Res() response: Response) {
         try {
@@ -250,6 +253,7 @@ return this.appService.getInscription();
             const payload = ticket.getPayload();
 
             if (!payload) {
+                console.error('Invalid Google token');
                 return response.status(HttpStatus.UNAUTHORIZED).json({ message: 'Token Google invalide' });
             }
 
@@ -274,22 +278,24 @@ return this.appService.getInscription();
             const jwtPayload = {
                 email: user.email,
                 sub: user.id,
-                prenom: user.prenom,  // Ajout du prénom dans le payload du JWT
-                nom: user.nom          // Ajout du nom dans le payload du JWT
+                prenom: user.prenom,
+                nom: user.nom
             };
 
             const token = this.jwtService.sign(jwtPayload);
-            const cookie = jwtPayload;
+            const isProduction = process.env.NODE_ENV === 'production';
 
             return response
-                .cookie('jwt', token, { httpOnly: true, secure: true }).status(HttpStatus.OK).json({
-                message: 'Connexion réussie',
-                user: {
-                    prenom: user.prenom,
-                    nom: user.nom,
-                    email: user.email,
-                }})
-
+                .cookie('jwt', token, { httpOnly: true, secure: isProduction })
+                .status(HttpStatus.OK)
+                .json({
+                    message: 'Connexion réussie',
+                    user: {
+                        prenom: user.prenom,
+                        nom: user.nom,
+                        email: user.email
+                    }
+                });
 
         } catch (error) {
             console.error('Error during Google login:', error);
@@ -298,7 +304,8 @@ return this.appService.getInscription();
     }
 
 
-  @Get('/login')
+
+    @Get('/login')
   @Render('login')
   getLogin() {
     return this.appService.getLogin();
@@ -308,7 +315,7 @@ return this.appService.getInscription();
 @Render('espace-jardinage')
 async getEspaceJardinage() {
   const jardins = await this.jardinsService.findAll();
-  return { jardins: JSON.stringify(jardins) };  // Convertir les données en chaîne JSON
+  return { jardins: JSON.stringify(jardins) };
 }
 
 
@@ -323,17 +330,48 @@ async getEspaceJardinage() {
             try {
                 // Vérifie et décode le token JWT
                 user = this.jwtService.verify(token);
-                console.log('Utilisateur décodé - Test:', user);  // Vous devriez maintenant voir "prenom" et "nom"
             } catch (err) {
-                console.log('Token invalide ou expiré');
+                // DEBUG : console.error('Error verifying JWT:', err);
+                user = null;
             }
         }
 
         // Renvoie les informations utilisateur (null si non connecté) à la vue
         const publications = await this.publicationsService.findAll(); // Exemple de récupération des publications
 
-        console.log('Publications:', publications);  // Ajout de la ligne de log
-        return { user, publications };
+        // On vérifie si l'utilisateur a pour parametre dans l'url ?success_commentaire=true
+        const successCommentaire = req.query.success_commentaire === 'true';
+        // If successCommentaire alors on return successCommentaire sinon on return null
+
+        return { user, publications, successCommentaire };
+    }
+
+    @Post('/:publicationId')
+    async likePublication(@Param('publicationId') publicationId: string, @Req() req, @Res() res: Response) {
+        let user = null;
+        const token = req.cookies?.jwt;
+
+        console.log('Token reçu:', token);
+        console.log('ID de la publication:', publicationId);
+
+        if (!token) {
+            return res.status(401).json({ message: 'Utilisateur non authentifié' });
+        }
+
+        try {
+            user = this.jwtService.verify(token);
+        } catch (err) {
+            return res.status(401).json({ message: 'Token invalide ou expiré' });
+        }
+
+        try {
+            const userId = user.id;
+            await this.likePublicationService.likePublication(publicationId, userId);
+            return res.status(200).json({ message: 'Publication likée avec succès' });
+        } catch (error) {
+            console.error('Erreur lors du like:', error.message);
+            return res.status(400).json({ message: error.message });
+        }
     }
 
 

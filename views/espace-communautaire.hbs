@@ -147,7 +147,12 @@
             <button type="button" class="cta-create-post p-2 rounded-lg"><img src="/img/plus.png" alt="icon plus"></button>
         </a>
 {{/if}}
-
+        <!-- successCommentaire -->
+        {{#if successCommentaire}}
+            <div class="alert alert-success" role="alert">
+                Votre commentaire a bien été ajouté
+            </div>
+        {{/if}}
         {{#each publications}}
             <div class="flex flex-col post p-8 rounded-xl w-fill-available gap-5">
                 <h2 class="heading4">{{titre}}</h2>
@@ -190,7 +195,7 @@
                 {{#if ../user}}
                     <div class="flex gap-5 mb-4 flex-col sm:flex-row">
                         <div class="flex items-center">
-                            <button class="p-3 flex gap-5 cta-column-left rounded-xl fit-content">
+                            <button class="p-3 flex gap-5 cta-column-left rounded-xl fit-content like-btn" data-publication-id="{{id}}">
                                 <i class="fi fi-rr-heart"></i>
                             </button>
                         </div>
@@ -240,29 +245,6 @@
 
     </div>
 </section>
-
-
-<script>
-    // Sélectionne tous les boutons avec la classe 'ajouter-une-reponse'
-    document.querySelectorAll('.ajouter-une-reponse').forEach(button => {
-        button.addEventListener('click', function() {
-            // Sélectionne le formulaire de réponse associé au bouton cliqué
-            const reponseDiv = this.closest('.post').querySelector('.reponseDiv');
-            if (reponseDiv.classList.contains('hidden')) {
-                reponseDiv.classList.remove('hidden');
-                this.style.backgroundColor = '#E6E2FB';
-            } else {
-                reponseDiv.classList.add('hidden');
-                this.style.backgroundColor = '#ECECEC';
-            }
-        });
-    });
-
-
-</script>
-
-
-
 
     <!-- Banniere des cookies -->
     <div id="cookie-banner" class="cookie-banner">
@@ -320,6 +302,6 @@
 
     </div>
 </footer>
-<script src="../script.js"></script>
+<script src="../espace-communautaire.js"></script>
 </body>
 </html>

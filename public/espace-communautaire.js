@@ -7,8 +7,10 @@ let init = () => {
     ajouterReponseDiv();
     ajouterReponseRequest();
 
-    document.getElementById('ajouter-publication').addEventListener('click', () => {
+    document.querySelectorAll('.ajouter-publication').forEach(button => {
+        button.addEventListener('click', () => {
         document.getElementById('sectionCreationPublication').classList.toggle('hidden');
+        });
     });
 
     // Ajoutez la classe 'liked' aux boutons déjà likés au chargement de la page
@@ -20,7 +22,7 @@ let init = () => {
             heartIcon.style.color = 'red'; // Change la couleur de l'icône pour les publications déjà likées
         }
     });
-}
+};
 
 let ajouterReponseDiv = () => {
     document.querySelectorAll('.ajouter-une-reponse').forEach(button => {
@@ -82,10 +84,3 @@ let ajouterReponseRequest = () => {
         });
     });
 };
-
-let ajouterPublication =  () => {
-    document.getElementById('ajouter-publication').addEventListener('click', () => {
-        document.getElementById('sectionCreationPublication').classList.toggle('hidden');
-    });
-
-}

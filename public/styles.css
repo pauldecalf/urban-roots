@@ -100,7 +100,7 @@ body {
   border-color: transparent;
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1024px) {
   #column-left{
     display: none;
   }
@@ -4831,6 +4831,10 @@ video {
   margin-bottom: 2.5rem;
 }
 
+.mb-2{
+  margin-bottom: 0.5rem;
+}
+
 .mb-3{
   margin-bottom: 0.75rem;
 }
@@ -4929,6 +4933,10 @@ video {
 
 .gap-2{
   gap: 0.5rem;
+}
+
+.gap-3{
+  gap: 0.75rem;
 }
 
 .gap-4{
@@ -5083,6 +5091,10 @@ video {
 @media (min-width: 1024px){
   .lg\:m-12{
     margin: 3rem;
+  }
+
+  .lg\:hidden{
+    display: none;
   }
 }
 

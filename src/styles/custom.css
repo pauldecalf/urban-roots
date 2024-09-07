@@ -97,7 +97,7 @@ body {
     border-color: transparent;
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1024px) {
     #column-left{
         display: none;
     }

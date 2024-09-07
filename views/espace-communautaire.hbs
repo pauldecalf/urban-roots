@@ -96,7 +96,7 @@
 
 
 <section class="grid grid-cols-8 w-full my-16">
-    <div id="column-left" class="column-left col-span-2 flex flex-col m-12">
+    <div id="column-left" class="lg:column-left col-span-2 flex flex-col m-12">
         <div class="flex flex-col gap-2 mb-10">
             <button type="button" class="p-3 flex gap-5 cta-column-left rounded-lg fit-content">
                 <i class="fi fi-rr-home"></i>
@@ -107,7 +107,7 @@
                 <span>Mes posts</span>
             </button>
 {{#if user}}
-            <button type="button" class="p-3 flex gap-5 cta-column-left rounded-lg fit-content" id="ajouter-publication">
+            <button type="button" class="ajouter-publication p-3 flex gap-5 cta-column-left rounded-lg fit-content">
                 <i class="fi fi-rr-bookmark"></i>
                 <span>Créer une publication</span>
             </button>
@@ -120,7 +120,6 @@
 
         </div>
         <h2 class="heading4 mb-3">Sujet en tendance</h2>
-
         <div class="flex flex-col gap-5">
             <button type="button" class="p-3 flex gap-5 rounded-lg fit-content cta-tendance">
                 <div class="flex flex-col items-start">
@@ -138,17 +137,47 @@
             </button>
             <button type="button" class="p-3 flex gap-5 rounded-lg fit-content cta-tendance">
                 <div class="flex flex-col items-start">
-                    <p class="text-base font-bold">Ressources</p>
-                    <p class="text-sm">01/07/2024 - 21:47</p>
+                    <p class="text-base font-bold">Jardinage</p>
+                    <p class="text-sm">09/07/2024 - 21:47</p>
                 </div>
                 <span class="text-sm font-bold  cta-column-left-topic rounded-xl p-4">49</span>
             </button>
         </div>
     </div>
     <div id="column-right" class="column-center col-span-6 m-3 lg:m-12 flex flex-col gap-6">
-    <div>
+
+
         <h1 class="heading2">Bienvenue sur l'espace communautaire</h1>
-    </div>
+        <div class="flex lg:hidden gap-2 mb-2">
+            <button type="button" class="p-3 flex gap-5 cta-column-left rounded-lg fit-content">
+                <i class="fi fi-rr-home"></i>
+                <span>Accueil</span>
+            </button>
+            <button type="button" class="p-3 flex gap-5 cta-column-left rounded-lg fit-content">
+                <i class="fi fi-rr-comment"></i>
+                <span>Mes posts</span>
+            </button>
+            {{#if user}}
+                <button type="button" class="ajouter-publication p-3 flex gap-5 cta-column-left rounded-lg fit-content" >
+                    <i class="fi fi-rr-bookmark"></i>
+                    <span>Créer une publication</span>
+                </button>
+            {{else}}
+                <a href="/login" type="button" class="p-3 flex gap-5 cta-column-left rounded-lg fit-content">
+                    <i class="fi fi-rr-bookmark"></i>
+                    <span>Vous devez étre connecter pour créer une publication</span>
+                </a>
+            {{/if}}
+        </div>
+        <!-- Filtre de publication option -->
+        <label class="lg:hidden flex flex-col gap-3">
+            <p>Filtrer par catégorie :</p>
+            <select name="tags" class="input-create-post p-2 border border-gray-300 rounded-lg">
+                <option value="agriculture">Agriculture</option>
+                <option value="ressources">Ressources</option>
+                <option value="jardinage">Jardinage</option>
+            </select>
+        </label>
 
         <!-- successCommentaire -->
         {{#if successCommentaire}}
@@ -183,9 +212,6 @@
                 </button>
             </form>
         </section>
-
-
-
 
         {{#each publications}}
             <div class="flex flex-col post p-8 rounded-xl w-fill-available gap-5">

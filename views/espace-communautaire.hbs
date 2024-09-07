@@ -98,11 +98,7 @@
 <section class="grid grid-cols-8 w-full my-16">
     <div id="column-left" class="lg:column-left col-span-2 flex flex-col m-12">
         <div class="flex flex-col gap-2 mb-10">
-            <button type="button" class="p-3 flex gap-5 cta-column-left rounded-lg fit-content">
-                <i class="fi fi-rr-home"></i>
-                <span>Accueil</span>
-            </button>
-            <button type="button" class="p-3 flex gap-5 cta-column-left rounded-lg fit-content">
+            <button type="button" class="p-3 flex gap-5 cta-column-left rounded-lg fit-content mesPosts">
                 <i class="fi fi-rr-comment"></i>
                 <span>Mes posts</span>
             </button>
@@ -121,26 +117,33 @@
         </div>
         <h2 class="heading4 mb-3">Sujet en tendance</h2>
         <div class="flex flex-col gap-5">
-            <button type="button" class="p-3 flex gap-5 rounded-lg fit-content cta-tendance">
+            <button id="ctaAgriculture" type="button" class="p-3 flex gap-5 rounded-lg fit-content cta-tendance">
                 <div class="flex flex-col items-start">
                     <p class="text-base font-bold">Agriculture</p>
                     <p class="text-sm">20/07/2024 - 17:38</p>
                 </div>
                 <span class="text-sm font-bold  cta-column-left-topic rounded-xl p-4">2</span>
             </button>
-            <button type="button" class="p-3 flex gap-5 rounded-lg fit-content cta-tendance">
+            <button id="ctaRessources" type="button" class="p-3 flex gap-5 rounded-lg fit-content cta-tendance">
                 <div class="flex flex-col items-start">
                     <p class="text-base font-bold">Ressources</p>
                     <p class="text-sm">01/07/2024 - 21:47</p>
                 </div>
                 <span class="text-sm font-bold  cta-column-left-topic rounded-xl p-4">49</span>
             </button>
-            <button type="button" class="p-3 flex gap-5 rounded-lg fit-content cta-tendance">
+            <button id="ctaJardinage" type="button" class="p-3 flex gap-5 rounded-lg fit-content cta-tendance">
                 <div class="flex flex-col items-start">
                     <p class="text-base font-bold">Jardinage</p>
                     <p class="text-sm">09/07/2024 - 21:47</p>
                 </div>
                 <span class="text-sm font-bold  cta-column-left-topic rounded-xl p-4">49</span>
+            </button>
+            <button id="ctaAll" type="button" class="p-3 flex gap-5 rounded-lg fit-content cta-tendance">
+                <div class="flex flex-col items-start">
+                    <p class="text-base font-bold">Tous les sujets</p>
+                    <p class="text-sm">02/08/2024 - 17:38</p>
+                </div>
+                <span class="text-sm font-bold  cta-column-left-topic rounded-xl p-4">100</span>
             </button>
         </div>
     </div>
@@ -149,11 +152,7 @@
 
         <h1 class="heading2">Bienvenue sur l'espace communautaire</h1>
         <div class="flex lg:hidden gap-2 mb-2">
-            <button type="button" class="p-3 flex gap-5 cta-column-left rounded-lg fit-content">
-                <i class="hidden xs:block fi fi-rr-home"></i>
-                <span>Accueil</span>
-            </button>
-            <button type="button" class="p-3 flex gap-5 cta-column-left rounded-lg fit-content">
+            <button type="button" class="p-3 flex gap-5 cta-column-left rounded-lg fit-content mesPosts">
                 <i class="hidden xs:block fi fi-rr-comment"></i>
                 <span>Mes posts</span>
             </button>
@@ -172,10 +171,31 @@
         <!-- Filtre de publication option -->
         <label class="lg:hidden flex flex-col gap-3">
             <p>Filtrer par catégorie :</p>
-            <select name="tags" class="input-create-post p-2 border border-gray-300 rounded-lg">
-                <option value="agriculture">Agriculture</option>
-                <option value="ressources">Ressources</option>
-                <option value="jardinage">Jardinage</option>
+            <select id="filtreTags" name="tags" class="input-create-post p-2 border border-gray-300 rounded-lg">
+                <option value="all"
+                    {{#if (eq selectedTag "all")}}
+                        selected
+                    {{/if}}
+                >Toutes les catégories</option>
+
+                <option value="agriculture"
+                    {{#if (eq selectedTag "agriculture")}}
+                        selected
+                    {{/if}}
+                >Agriculture</option>
+
+                <option value="ressources"
+                    {{#if (eq selectedTag "ressources")}}
+                        selected
+                    {{/if}}
+                >Ressources</option>
+
+                <option value="jardinage"
+                    {{#if (eq selectedTag "jardinage")}}
+                        selected
+                    {{/if}}
+                >Jardinage</option>
+
             </select>
         </label>
 

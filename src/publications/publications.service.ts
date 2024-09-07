@@ -20,6 +20,21 @@ export class PublicationsService {
         return this.findAllWithComments();
     }
 
+    // Un findall avec avec un filtre tags
+    async findAllWithTags(tags: string[]): Promise<Publications[]> {
+        return this.publicationsModel
+            .find({ tags: { $in: tags } })
+            .populate({ path: 'commentaires', populate: { path: 'createdBy', select: 'prenom imgProfil' } })
+            .exec();
+    }
+
+    async findAllWithIdUser(idUser: string): Promise<Publications[]> {
+        return this.publicationsModel
+            .find({ createdBy: idUser })
+            .populate({ path: 'commentaires', populate: { path: 'createdBy', select: 'prenom imgProfil' } })
+            .exec();
+    }
+
     async findOne(id: string): Promise<Publications> {
         const publication = await this.publicationsModel.findById(id).populate('commentaires').exec();
         if (!publication) {

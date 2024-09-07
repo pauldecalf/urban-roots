@@ -7,6 +7,33 @@ let init = () => {
     ajouterReponseDiv();
     ajouterReponseRequest();
 
+    document.getElementById('filtreTags').addEventListener('change', function () {
+        filtreTagsDropdown();
+    });
+
+    document.querySelectorAll('.mesPosts').forEach(element => {
+        element.addEventListener('click', function () {
+            window.location.href = '/espace-communautaire?tag=mesPosts';
+        });
+    });
+
+    document.getElementById('ctaAgriculture').addEventListener('click', function () {
+        window.location.href = '/espace-communautaire?tag=agriculture';
+    });
+
+    document.getElementById('ctaJardinage').addEventListener('click', function () {
+        window.location.href = '/espace-communautaire?tag=jardinage';
+    });
+
+    document.getElementById('ctaRessources').addEventListener('click', function () {
+        window.location.href = '/espace-communautaire?tag=Ressources';
+    });
+
+    document.getElementById('ctaAll').addEventListener('click', function () {
+        window.location.href = '/espace-communautaire';
+    });
+
+
     document.querySelectorAll('.ajouter-publication').forEach(button => {
         button.addEventListener('click', () => {
         document.getElementById('sectionCreationPublication').classList.toggle('hidden');
@@ -84,3 +111,12 @@ let ajouterReponseRequest = () => {
         });
     });
 };
+
+let filtreTagsDropdown = () => {
+        // on redirige vers la page de la catégorie sélectionnée
+        if (document.getElementById('filtreTags').value === 'all') {
+            window.location.href = '/espace-communautaire';
+            return;
+        }
+        window.location.href = `/espace-communautaire?tag=${document.getElementById('filtreTags').value}`;
+}

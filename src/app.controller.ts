@@ -331,13 +331,15 @@ async getEspaceJardinage() {
 
     @Get('/espace-communautaire')
     @Render('espace-communautaire')
-    async getEspaceCommunautaire(@Request() req) {
+    async getEspaceCommunautaire(@Request() req,@Query('tag') tag: string) {
         let user = null;
+        let userId = null;
         const token = req.cookies?.jwt;
 
         if (token) {
             try {
                 user = this.jwtService.verify(token);
+                 userId = user.sub;
             } catch (err) {
                 user = null;
             }
@@ -345,8 +347,20 @@ async getEspaceJardinage() {
 
         const successCommentaire = req.query.success_commentaire === 'true';
 
-        // Récupération des publications
-        const publications = await this.publicationsService.findAll();
+// Récupérez le tag de l'URL, s'il existe
+        let selectedTag = tag;  // Par défaut, 'all' si aucun tag n'est fourni
+        let publications = []
+        // On récupére le parametre tag de l'url si il y a en a un
+        console.log('tag :', selectedTag);
+        if(selectedTag){
+             publications = await this.publicationsService.findAllWithTags([selectedTag]);
+        } else {
+             publications = await this.publicationsService.findAll();
+        }
+
+        if (selectedTag == "mesPosts") {
+            publications = await this.publicationsService.findAllWithIdUser(userId);
+        }
 
         // Ajouter si l'utilisateur a liké chaque publication
         const publicationsWithLikes = await Promise.all(
@@ -358,7 +372,8 @@ async getEspaceJardinage() {
             })
         );
 
-        return { user, publications: publicationsWithLikes, successCommentaire };
+        console.log('publications:', publications);
+        return { user,selectedTag, publications: publicationsWithLikes, successCommentaire };
     }
 
 

@@ -61,10 +61,24 @@ export class AppController {
 
     @Get()
     @Render('index')
-    async getArticles(@Query('success') success: string) {
+    async getArticles(@Query('error') error: string,@Query('success') success: string,@Req() req, @Res() res: Response) {
+        let user = null;
+        let userId = null;
+        const token = req.cookies?.jwt;
+
+        if (token) {
+            try {
+                user = this.jwtService.verify(token);
+                userId = user.sub;
+            } catch (err) {
+                user = null;
+            }
+        }
         console.log('Success message:', success); // Ajout de la ligne de log
         const articles: Article[] = await this.articlesService.findAll();
-        return { articles, successMessage: success };
+
+
+        return {user, articles, successMessage: success };
     }
 
 

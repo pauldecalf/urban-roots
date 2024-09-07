@@ -5062,6 +5062,12 @@ video {
   background-color: rgb(37 99 235 / var(--tw-bg-opacity));
 }
 
+@media (min-width: 494px){
+  .xs\:block{
+    display: block;
+  }
+}
+
 @media (min-width: 640px){
   .sm\:mx-6{
     margin-left: 1.5rem;

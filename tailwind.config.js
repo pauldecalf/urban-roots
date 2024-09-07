@@ -12,6 +12,7 @@ module.exports = {
       },
     },
     screens: {
+        'xs': '494px',
       'sm': '640px',
       'md': '768px',
       'lg': '1024px', // Assurez-vous que lg est défini à 1024px

@@ -150,21 +150,21 @@
         <h1 class="heading2">Bienvenue sur l'espace communautaire</h1>
         <div class="flex lg:hidden gap-2 mb-2">
             <button type="button" class="p-3 flex gap-5 cta-column-left rounded-lg fit-content">
-                <i class="fi fi-rr-home"></i>
+                <i class="hidden xs:block fi fi-rr-home"></i>
                 <span>Accueil</span>
             </button>
             <button type="button" class="p-3 flex gap-5 cta-column-left rounded-lg fit-content">
-                <i class="fi fi-rr-comment"></i>
+                <i class="hidden xs:block fi fi-rr-comment"></i>
                 <span>Mes posts</span>
             </button>
             {{#if user}}
                 <button type="button" class="ajouter-publication p-3 flex gap-5 cta-column-left rounded-lg fit-content" >
-                    <i class="fi fi-rr-bookmark"></i>
+                    <i class="hidden xs:block fi fi-rr-bookmark"></i>
                     <span>Créer une publication</span>
                 </button>
             {{else}}
                 <a href="/login" type="button" class="p-3 flex gap-5 cta-column-left rounded-lg fit-content">
-                    <i class="fi fi-rr-bookmark"></i>
+                    <i class="hidden xs:block fi fi-rr-bookmark"></i>
                     <span>Créer une publication</span>
                 </a>
             {{/if}}

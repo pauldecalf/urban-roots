@@ -113,7 +113,8 @@
                         Transformez votre quotidien de <strong>jardinier urbain</strong> en une expérience collaborative et enrichissante.
                     </p>
                 </div>
-{{# if user}}
+                {{#if user }}
+                {{else}}
                 <div class="cta-section">
                     <p class="paragraph-bold">Inscrivez-vous dès maintenant pour être informé en avant-première !</p>
                     <a href="/login" class="waitlist-btn cta-lg tonal-cta">
@@ -123,7 +124,7 @@
                         </svg>
                     </a>
                 </div>
-{{/if}}
+                {{/if}}
             </div>
             <div id="right" class="hero-image ">
                 <img src="/img/iStock-1226897318.avif" class="rounded-lg" alt="famille recomposée épanouie">

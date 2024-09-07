@@ -74,7 +74,6 @@ export class AppController {
                 user = null;
             }
         }
-        console.log('Success message:', success); // Ajout de la ligne de log
         const articles: Article[] = await this.articlesService.findAll();
 
 

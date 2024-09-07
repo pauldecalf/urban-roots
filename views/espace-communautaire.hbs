@@ -106,10 +106,18 @@
                 <i class="fi fi-rr-comment"></i>
                 <span>Mes posts</span>
             </button>
+{{#if user}}
+            <button type="button" class="p-3 flex gap-5 cta-column-left rounded-lg fit-content" id="ajouter-publication">
+                <i class="fi fi-rr-bookmark"></i>
+                <span>Créer une publication</span>
+            </button>
+{{else}}
             <button type="button" class="p-3 flex gap-5 cta-column-left rounded-lg fit-content">
                 <i class="fi fi-rr-bookmark"></i>
-                <span>Mes favoris</span>
+                <span>Vous devez étre connecter pour créer une publication</span>
             </button>
+{{/if}}
+
         </div>
         <h2 class="heading4 mb-3">Sujet en tendance</h2>
 
@@ -138,32 +146,58 @@
         </div>
     </div>
     <div id="column-right" class="column-center col-span-6 m-3 lg:m-12 flex flex-col gap-6">
-            <div>
+    <div>
         <h1 class="heading2">Bienvenue sur l'espace communautaire</h1>
     </div>
-{{#if user}}
-        <div class="flex input-new-post p-4 rounded-xl w-fill-available justify-between">
-            <input type="text" placeholder="Créez un nouveau post" class="input-create-post w-inherit">
-            <button type="button" class="cta-create-post p-2 rounded-lg"><img src="/img/plus.png" alt="icon plus"></button>
-        </div>
-{{else}}
-        <a href="/login" class="items-center flex input-new-post p-4 rounded-xl w-fill-available justify-between">
-            <p class="text-sm sm:text-base input-create-post w-inherit" >Vous devez être connecté pour créer un post</p>
-            <button type="button" class="cta-create-post p-2 rounded-lg"><img src="/img/plus.png" alt="icon plus"></button>
-        </a>
-{{/if}}
+
         <!-- successCommentaire -->
         {{#if successCommentaire}}
             <div class="alert alert-success" role="alert">
                 Votre commentaire a bien été ajouté
             </div>
         {{/if}}
+
+        <section id="sectionCreationPublication" class="hidden flex flex-col post p-8 rounded-xl w-fill-available gap-5">
+            <h3 class="heading3">Formulaire de création de publication</h3>
+            <form action="/creationPublication" method="post" class="flex flex-col gap-5">
+                <label>
+                    <p>Titre de votre publication :</p>
+                    <input name="titre" type="text" placeholder="Titre de votre publication" class="input-create-post w-full p-2 border border-gray-300 rounded-lg">
+                </label>
+                <label>
+                    <p>Contenu de votre publication :</p>
+                    <textarea name="contenu" placeholder="Contenu de votre publication" class="input-create-post w-full p-2 border border-gray-300 rounded-lg"></textarea>
+                </label>
+
+                <label>
+                    <p>Catégorie de votre publication :</p>
+                    <select name="tags" class="input-create-post w-full p-2 border border-gray-300 rounded-lg">
+                        <option value="agriculture">Agriculture</option>
+                        <option value="ressources">Ressources</option>
+                        <option value="jardinage">Jardinage</option>
+                    </select>
+                </label>
+
+                <button type="submit" class="cta-create-post p-4 rounded-lg bg-blue-500 text-white hover:bg-blue-600" id="submitPublication">
+                    <p>Publier</p>
+                </button>
+            </form>
+        </section>
+
+
+
+
         {{#each publications}}
             <div class="flex flex-col post p-8 rounded-xl w-fill-available gap-5">
                 <h2 class="heading4">{{titre}}</h2>
                 <div class="flex gap-5 justify-between">
                     <div class="flex gap-4">
-                        <img src="../{{imageEditeur}}" width="56" alt="image de photo de profil" class="rounded-xl">
+                        {{#contains imageEditeur "http"}}
+                            <img src="{{imageEditeur}}" width="56" alt="image de photo de profil" class="rounded-xl">
+                        {{else}}
+                            <img src="../{{imageEditeur}}" width="56" alt="image de photo de profil" class="rounded-xl">
+                        {{/contains}}
+
                         <div>
                             <p class="text-sm font-bold">{{ nomEditeur }}</p>
                             <p class="text-sm">Publié le {{formatDate createdAt}}</p> <!-- Format de la date -->
@@ -198,7 +232,7 @@
                     <div class="flex gap-5 mb-4 flex-col sm:flex-row">
                         <div class="flex items-center">
                             {{#if publicationLiked}}
-                                <button class="p-3 flex gap-5 cta-column-left rounded-xl fit-content like-btn" data-publication-id="{{_id}}" data-publication-liked="{{publicationLiked}}"">
+                                <button class="p-3 flex gap-5 cta-column-left rounded-xl fit-content like-btn" data-publication-id="{{_id}}" data-publication-liked="{{publicationLiked}}">
                                     <i class="fi fi-rr-heart text-red-600"></i>
                                 </button>
                             {{else}}
@@ -235,7 +269,8 @@
                     <p>Rédaction d'un commentaire</p>
                     <form action="commentaire/comment" method="post">
                         <!-- Champ caché pour stocker l'ID de la publication -->
-                        <input type="hidden" name="publicationId" value="{{id}}">
+                        <input type="hidden" name="publicationId" value="{{_id}}">
+
 
                         <div class="flex">
                             <!-- Champ pour l'utilisateur de saisir son commentaire -->

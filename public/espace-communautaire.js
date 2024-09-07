@@ -7,6 +7,10 @@ let init = () => {
     ajouterReponseDiv();
     ajouterReponseRequest();
 
+    document.getElementById('ajouter-publication').addEventListener('click', () => {
+        document.getElementById('sectionCreationPublication').classList.toggle('hidden');
+    });
+
     // Ajoutez la classe 'liked' aux boutons déjà likés au chargement de la page
     document.querySelectorAll('.like-btn').forEach(button => {
         const isLiked = button.getAttribute('data-publication-liked') === 'true'; // Vérifie si la publication est déjà likée
@@ -78,3 +82,10 @@ let ajouterReponseRequest = () => {
         });
     });
 };
+
+let ajouterPublication =  () => {
+    document.getElementById('ajouter-publication').addEventListener('click', () => {
+        document.getElementById('sectionCreationPublication').classList.toggle('hidden');
+    });
+
+}

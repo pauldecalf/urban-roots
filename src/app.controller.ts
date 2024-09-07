@@ -343,8 +343,6 @@ async getEspaceJardinage() {
             }
         }
 
-
-
         const successCommentaire = req.query.success_commentaire === 'true';
 
         // Récupération des publications
@@ -400,6 +398,39 @@ async getEspaceJardinage() {
             return res.status(200).json({ message: 'Publication unlikée avec succès' });
         } catch (err) {
             console.error('Erreur lors du unlike:', err);
+            return res.status(400).json({ message: err.message });
+        }
+    }
+
+    // Création de publication a partir d'un envoi POST depuis le formulaire de la page espace-communautaire
+    @Post('/creationPublication')
+    async createPublication(@Body() createPublicationDto: any, @Req() req, @Res() res: Response) {
+        const token = req.cookies?.jwt;
+
+        if (!token) {
+            return res.status(401).json({ message: 'Utilisateur non authentifié' });
+        }
+
+        try {
+            const user = this.jwtService.verify(token);
+            const userId = user.sub;
+
+            // Requete pour récupérer les informations de l'utilisateur
+            const userImg = await this.usersService.findOne(userId);
+
+
+
+            const publication = await this.publicationsService.create({
+                ...createPublicationDto,
+                createdBy: userId,
+                nomEditeur: user.prenom + ' ' + user.nom,
+                imageEditeur: userImg.imgProfil,
+                createdAt: new Date(),
+            });
+
+            return res.status(201).json({ publication });
+        } catch (err) {
+            console.error('Erreur lors de la création de la publication:', err);
             return res.status(400).json({ message: err.message });
         }
     }

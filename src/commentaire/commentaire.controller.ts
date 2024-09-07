@@ -22,6 +22,7 @@ export class CommentaireController {
         @Req() req: Request,
         @Res() response: Response,
     ) {
+
         try {
             const token = req.cookies?.jwt;
             let user = null;

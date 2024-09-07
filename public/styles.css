@@ -4895,10 +4895,6 @@ video {
   width: 100%;
 }
 
-.w-inherit{
-  width: inherit;
-}
-
 .cursor-pointer{
   cursor: pointer;
 }
@@ -5070,11 +5066,6 @@ video {
 
   .sm\:flex-row{
     flex-direction: row;
-  }
-
-  .sm\:text-base{
-    font-size: 1rem;
-    line-height: 1.5rem;
   }
 }
 

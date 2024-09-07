@@ -22,6 +22,16 @@ async function bootstrap() {
     return `${day}/${month}/${year}`;
   });
 
+// Helper Handlebars personnalisé pour vérifier si une chaîne contient un sous-texte
+  hbs.registerHelper('contains', function (haystack: string | any[], needle: any, options: { fn: (arg0: any) => any; inverse: (arg0: any) => any; }) {
+    if (haystack && haystack.includes(needle)) {
+      return options.fn(this);  // Si la condition est vraie
+    } else {
+      return options.inverse(this);  // Si la condition est fausse
+    }
+  });
+
+
   hbs.registerHelper('limit', function(arr, limit) {
     if (!Array.isArray(arr)) {
       return [];

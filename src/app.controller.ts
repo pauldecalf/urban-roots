@@ -83,13 +83,46 @@ export class AppController {
 
   @Get('/contact')
   @Render('contact')
-  getContact() {
-    return this.appService.getContact();
+  getContact(@Query('error') error: string,@Query('success') success: string,@Req() req, @Res() res: Response) {
+    let user = null;
+    let userId = null;
+    const token = req.cookies?.jwt;
+
+    if (token) {
+        try {
+            user = this.jwtService.verify(token);
+            userId = user.sub;
+        } catch (err) {
+            user = null;
+        }
+    }
+
+    return {user, successMessage: success, errorMessage: error };
   }
+
+    @Get('/logout')
+    @Render('index')
+    async logout(@Req() req, @Res() res: Response) {
+        return res.clearCookie('jwt').redirect('/');
+    }
 
   @Get('/blog')
   @Render('blog')
-  async getBlog(@Query('page') page: string = '1') {
+  async getBlog(@Query('page') page: string = '1', @Req() req, @Res() res: Response) {
+      let user = null;
+      let userId = null;
+      const token = req.cookies?.jwt;
+
+      if (token) {
+          try {
+              user = this.jwtService.verify(token);
+              userId = user.sub;
+          } catch (err) {
+              user = null;
+          }
+      }
+
+
     const pageNumber = parseInt(page, 10) || 1;
     const limit = 6;
     const skip = (pageNumber - 1) * limit;
@@ -98,50 +131,140 @@ export class AppController {
       this.articlesService.countAll()
     ]);
     const totalPages = Math.ceil(totalArticles / limit);
-    return { articles, currentPage: pageNumber, totalPages };
+    return {user, articles, currentPage: pageNumber, totalPages };
   }
 
   @Get('articles/:slugUrl')
   @Render('article')
-  async getArticle(@Param('slugUrl') slugUrl: string) {
+  async getArticle(@Param('slugUrl') slugUrl: string, @Req() req, @Res() res: Response) {
+      let user = null;
+      let userId = null;
+      const token = req.cookies?.jwt;
+
+      if (token) {
+          try {
+              user = this.jwtService.verify(token);
+              userId = user.sub;
+          } catch (err) {
+              user = null;
+          }
+      }
+
     const article: Article = await this.articlesService.findOneBySlug(slugUrl);
     const articles: Article[] = await this.articlesService.findAll();
-    return { article, articles };
+    return {user, article, articles };
   }
 
 
   @Get('articles/')
   @Render('maintenance')
-  getError() {}
+  getError( @Req() req, @Res() res: Response) {
+      let user = null;
+      let userId = null;
+      const token = req.cookies?.jwt;
+
+      if (token) {
+          try {
+              user = this.jwtService.verify(token);
+              userId = user.sub;
+          } catch (err) {
+              user = null;
+          }
+      }
+  }
 
   @Get('/maintenance')
   @Render('maintenance')
-  getMaintenance() {
+  getMaintenance( @Req() req, @Res() res: Response) {
+      let user = null;
+      let userId = null;
+      const token = req.cookies?.jwt;
+
+      if (token) {
+          try {
+              user = this.jwtService.verify(token);
+              userId = user.sub;
+          } catch (err) {
+              user = null;
+          }
+      }
+
     return this.appService.getMaintenance();
   }
 
   @Get('/mentionslegales')
   @Render('mentionslegales')
-  getMentionsLegales() {
-    return this.appService.getMentionsLegales();
+  getMentionsLegales( @Req() req, @Res() res: Response) {
+      let user = null;
+      let userId = null;
+      const token = req.cookies?.jwt;
+
+      if (token) {
+          try {
+              user = this.jwtService.verify(token);
+              userId = user.sub;
+          } catch (err) {
+              user = null;
+          }
+      }
+    return {user};
   }
 
   @Get('/politiqueconfidentialite')
   @Render('politiqueconfidentialite')
-  getPolitiqueConfidentialite() {
-    return this.appService.getPolitiqueConfidentialite();
+  getPolitiqueConfidentialite( @Req() req, @Res() res: Response) {
+      let user = null;
+      let userId = null;
+      const token = req.cookies?.jwt;
+
+      if (token) {
+          try {
+              user = this.jwtService.verify(token);
+              userId = user.sub;
+          } catch (err) {
+              user = null;
+          }
+      }
+
+    return {user};
   }
 
   @Get('/faq')
   @Render('faq')
-  getFaq() {
-    return this.appService.getFaq();
+  getFaq( @Req() req, @Res() res: Response) {
+      let user = null;
+      let userId = null;
+      const token = req.cookies?.jwt;
+
+      if (token) {
+          try {
+              user = this.jwtService.verify(token);
+              userId = user.sub;
+          } catch (err) {
+              user = null;
+          }
+      }
+
+    return {user};
   }
 
 @Get('/register')
 @Render('register')
-getInscription() {
-return this.appService.getInscription();
+getInscription( @Req() req, @Res() res: Response) {
+    let user = null;
+    let userId = null;
+    const token = req.cookies?.jwt;
+
+    if (token) {
+        try {
+            user = this.jwtService.verify(token);
+            userId = user.sub;
+        } catch (err) {
+            user = null;
+        }
+    }
+
+return {user};
 }
 
 
@@ -329,8 +452,21 @@ return this.appService.getInscription();
 
     @Get('/login')
   @Render('login')
-  getLogin() {
-    return this.appService.getLogin();
+  getLogin( @Req() req, @Res() res: Response) {
+        let user = null;
+        let userId = null;
+        const token = req.cookies?.jwt;
+
+        if (token) {
+            try {
+                user = this.jwtService.verify(token);
+                userId = user.sub;
+            } catch (err) {
+                user = null;
+            }
+        }
+
+    return {user};
   }
 
 @Get('/espace-jardinage')

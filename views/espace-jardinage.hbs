@@ -42,6 +42,11 @@
             <a href="/blog" class="desktop-navlink">Modules éducatifs</a>
             <a href="/faq" class="desktop-navlink">FAQ</a>
             <a href="/contact" class="desktop-navlink">Contact</a>
+            {{#if user}}
+                <a href="/logout" class="desktop-navlink">Déconnexion</a>
+            {{else}}
+                <a href="/login" class="desktop-navlink">Connexion</a>
+            {{/if}}
         </div>
     </div>
 
@@ -59,6 +64,11 @@
             <a href="/blog">Modules éducatifs</a>
             <a href="/faq">FAQ</a>
             <a href="/contact">Contact</a>
+            {{#if user}}
+                <a href="/logout">Déconnexion</a>
+            {{else}}
+                <a href="/login">Connexion</a>
+            {{/if}}
         </div>
     </nav>
 

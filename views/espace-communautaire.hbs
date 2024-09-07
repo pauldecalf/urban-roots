@@ -24,6 +24,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.4.2/uicons-regular-rounded/css/uicons-regular-rounded.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.4.2/uicons-solid-rounded/css/uicons-solid-rounded.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.4.2/uicons-thin-rounded/css/uicons-thin-rounded.css">
+
+
+
 </head>
 
 
@@ -187,17 +192,21 @@
                         </div>
                         <p>{{message}}</p>
                     </div>
-
                 {{/each}}
-
-
                 <!-- Boutons d'interaction -->
                 {{#if ../user}}
                     <div class="flex gap-5 mb-4 flex-col sm:flex-row">
                         <div class="flex items-center">
-                            <button class="p-3 flex gap-5 cta-column-left rounded-xl fit-content like-btn" data-publication-id="{{id}}">
-                                <i class="fi fi-rr-heart"></i>
-                            </button>
+                            {{#if publicationLiked}}
+                                <button class="p-3 flex gap-5 cta-column-left rounded-xl fit-content like-btn" data-publication-id="{{_id}}">
+                                    <i class="fi fi-rr-heart text-red-600"></i>
+                                </button>
+                            {{else}}
+                                <button class="p-3 flex gap-5 cta-column-left rounded-xl fit-content like-btn" data-publication-id="{{_id}}">
+                                    <i class="fi fi-rr-heart"></i> <!-- Icône pour un cœur vide -->
+                                </button>
+                            {{/if}}
+
                         </div>
                         <div class="flex items-center gap-4">
                             <button class="ajouter-une-reponse p-3 flex gap-5 cta-column-left rounded-xl fit-content">
@@ -239,6 +248,8 @@
                         </div>
                     </form>
                 </div>
+
+
 
             </div>
         {{/each}}
@@ -303,5 +314,6 @@
     </div>
 </footer>
 <script src="../espace-communautaire.js"></script>
+<script src="../script.js"></script>
 </body>
 </html>

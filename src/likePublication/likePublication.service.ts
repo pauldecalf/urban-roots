@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 import { likePublication } from './interfaces/likePublication.interface';
 
 @Injectable()
@@ -9,7 +9,11 @@ export class LikePublicationService {
         @InjectModel('LikePublication') private readonly likeModel: Model<likePublication>,
     ) {}
 
-    async likePublication(publicationId: string, userId: string): Promise<likePublication> {
+    async likePublication(publicationId: string, userId: string): Promise<void> {
+        if (!mongoose.Types.ObjectId.isValid(publicationId)) {
+            throw new Error('ID de publication invalide');
+        }
+
         const existingLike = await this.likeModel.findOne({ publicationId, createdBy: userId });
 
         if (existingLike) {
@@ -22,9 +26,8 @@ export class LikePublicationService {
             createdAt: new Date(),
         });
 
-        return newLike.save();
+        await newLike.save();
     }
-
 
     async unlikePublication(publicationId: string, userId: string): Promise<void> {
         const like = await this.likeModel.findOneAndDelete({ publicationId, createdBy: userId });
@@ -32,4 +35,17 @@ export class LikePublicationService {
             throw new Error('Like introuvable.');
         }
     }
+
+    // Cette méthode permet de vérifier si un utilisateur a liké une publication
+    async hasLiked(publicationId, userId) {
+        try {
+            const like = await this.likeModel.findOne({ publicationId, userId });
+            return !!like; // Retourne true si un like existe, sinon false
+        } catch (error) {
+            console.error('Erreur dans hasLiked:', error);
+            return null; // Retourne null en cas d'erreur
+        }
+    }
+
 }
+

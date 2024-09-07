@@ -10,6 +10,8 @@ async function bootstrap() {
 
   app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
+  // Enregistrez le répertoire des partiels
+  hbs.registerPartials(join(__dirname, '..', 'views', 'composants'));
   app.setViewEngine('hbs');
 
   hbs.registerHelper('formatDate', function(date: Date) {

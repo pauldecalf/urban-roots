@@ -4192,6 +4192,18 @@ nav div{
   border-radius: .25rem;
 }
 
+.liked {
+  background-color: #ff69b4;
+  /* Couleur rose pour l'état liké */
+  color: #fff;
+  /* Pour que le texte/icon reste visible */
+}
+
+.like-btn.liked i {
+  color: pink;
+  /* Cœur rose pour les publications likées */
+}
+
 /*! tailwindcss v3.4.4 | MIT License | https://tailwindcss.com*/
 
 /*
@@ -5017,6 +5029,11 @@ video {
 .text-gray-800{
   --tw-text-opacity: 1;
   color: rgb(31 41 55 / var(--tw-text-opacity));
+}
+
+.text-red-600{
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity));
 }
 
 .text-white{

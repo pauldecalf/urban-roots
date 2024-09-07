@@ -26,7 +26,7 @@ import { config } from 'dotenv';
 import { UseGuards, Request } from '@nestjs/common';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { ConfigService } from '@nestjs/config';
-import {Schema} from "mongoose";
+import mongoose, {Schema} from "mongoose";
 import {JwtService} from "@nestjs/jwt";
 import {FileInterceptor} from "@nestjs/platform-express";
 import {diskStorage} from "multer";
@@ -260,19 +260,26 @@ return this.appService.getInscription();
             let user = await this.usersService.findOneByEmail(payload.email);
 
             if (!user) {
-                const [prenom, ...rest] = payload.name.split(' ');
-                const nom = rest.join(' ');
+                try {
+                    const [prenom, ...rest] = payload.name.split(' ');
+                    const nom = rest.join(' ');
 
-                user = await this.usersService.create({
-                    genre: 'default-genre',
-                    prenom: prenom,
-                    nom: nom,
-                    email: payload.email,
-                    googleId: payload.sub,
-                    imgProfil: payload.picture,
-                    password: undefined,
-                    createdAt: new Date(),
-                });
+                    user = await this.usersService.create({
+                        genre: 'default-genre',
+                        prenom: prenom || 'default-prenom',
+                        nom: nom || 'default-nom',
+                        email: payload.email,
+                        googleId: payload.sub,
+                        imgProfil: payload.picture,
+                        password: undefined,  // No password for Google users
+                        createdAt: new Date(),
+                    });
+                } catch (createError) {
+                    console.error('Error creating user:', createError);
+                    return response.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+                        message: 'Une erreur est survenue lors de la création de votre compte. Veuillez réessayer.'
+                    });
+                }
             }
 
             const jwtPayload = {
@@ -299,7 +306,9 @@ return this.appService.getInscription();
 
         } catch (error) {
             console.error('Error during Google login:', error);
-            return response.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Une erreur est survenue lors de votre connexion avec Google' });
+            return response.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+                message: 'Une erreur est survenue lors de votre connexion avec Google. Veuillez réessayer plus tard.'
+            });
         }
     }
 
@@ -328,52 +337,52 @@ async getEspaceJardinage() {
 
         if (token) {
             try {
-                // Vérifie et décode le token JWT
                 user = this.jwtService.verify(token);
             } catch (err) {
-                // DEBUG : console.error('Error verifying JWT:', err);
                 user = null;
             }
         }
 
-        // Renvoie les informations utilisateur (null si non connecté) à la vue
-        const publications = await this.publicationsService.findAll(); // Exemple de récupération des publications
 
-        // On vérifie si l'utilisateur a pour parametre dans l'url ?success_commentaire=true
+
         const successCommentaire = req.query.success_commentaire === 'true';
-        // If successCommentaire alors on return successCommentaire sinon on return null
 
-        return { user, publications, successCommentaire };
+        // Récupération des publications
+        const publications = await this.publicationsService.findAll();
+
+        // Ajouter si l'utilisateur a liké chaque publication
+        const publicationsWithLikes = await Promise.all(
+            publications.map(async (publication) => {
+                const publicationLiked = user
+                    ? await this.likePublicationService.hasLiked(publication._id, user.id) // Vérification du like
+                    : false;
+                return { ...publication.toObject(), publicationLiked };
+            })
+        );
+
+        return { user, publications: publicationsWithLikes, successCommentaire };
     }
 
-    @Post('/:publicationId')
-    async likePublication(@Param('publicationId') publicationId: string, @Req() req, @Res() res: Response) {
-        let user = null;
-        const token = req.cookies?.jwt;
 
-        console.log('Token reçu:', token);
-        console.log('ID de la publication:', publicationId);
+     @Post('/LikePublication/:publicationId')
+    async likePublication(@Param('publicationId') publicationId: string, @Req() req, @Res() res: Response) {
+        const token = req.cookies?.jwt;
 
         if (!token) {
             return res.status(401).json({ message: 'Utilisateur non authentifié' });
         }
 
         try {
-            user = this.jwtService.verify(token);
-        } catch (err) {
-            return res.status(401).json({ message: 'Token invalide ou expiré' });
-        }
+            const user = this.jwtService.verify(token);
+            const userId = user.sub;
 
-        try {
-            const userId = user.id;
             await this.likePublicationService.likePublication(publicationId, userId);
             return res.status(200).json({ message: 'Publication likée avec succès' });
-        } catch (error) {
-            console.error('Erreur lors du like:', error.message);
-            return res.status(400).json({ message: error.message });
+        } catch (err) {
+            console.error('Erreur lors du like:', err);
+            return res.status(400).json({ message: err.message });
         }
     }
-
 
 
 

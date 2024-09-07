@@ -3908,3 +3908,11 @@ nav div{
     border: 1px solid transparent;
     border-radius: .25rem;
 }
+
+.liked {
+    background-color: #ff69b4; /* Couleur rose pour l'état liké */
+    color: #fff; /* Pour que le texte/icon reste visible */
+}
+.like-btn.liked i {
+    color: pink; /* Cœur rose pour les publications likées */
+}

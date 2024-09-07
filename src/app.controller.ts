@@ -486,7 +486,7 @@ async getEspaceJardinage(@Query('error') error: string,@Query('success') success
     }
 
   const jardins = await this.jardinsService.findAll();
-  return {success: success === 'true',error: error === 'true',user, jardins: JSON.stringify(jardins) };
+  return {success: success === 'true',error: error === 'true',user, jardins: JSON.stringify(jardins), jardinsArray: jardins};
 }
 
 

@@ -4550,6 +4550,11 @@ button.close {
   opacity: .5;
 }
 
+#listeDesJardins{
+  height: 300px;
+  overflow-y: auto;
+}
+
 /*! tailwindcss v3.4.4 | MIT License | https://tailwindcss.com*/
 
 /*
@@ -5266,6 +5271,10 @@ video {
   flex-direction: column;
 }
 
+.flex-wrap{
+  flex-wrap: wrap;
+}
+
 .items-start{
   align-items: flex-start;
 }
@@ -5418,6 +5427,10 @@ video {
 }
 
 @media (min-width: 494px){
+  .xs\:m-12{
+    margin: 3rem;
+  }
+
   .xs\:block{
     display: block;
   }

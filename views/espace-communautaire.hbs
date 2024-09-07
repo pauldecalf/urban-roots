@@ -108,10 +108,10 @@
                 <span>Créer une publication</span>
             </button>
 {{else}}
-            <button type="button" class="p-3 flex gap-5 cta-column-left rounded-lg fit-content">
+            <a href="/login" class="p-3 flex gap-5 cta-column-left rounded-lg fit-content">
                 <i class="fi fi-rr-bookmark"></i>
-                <span>Vous devez étre connecter pour créer une publication</span>
-            </button>
+                <span>Créer une publication</span>
+            </a>
 {{/if}}
 
         </div>
@@ -205,7 +205,16 @@
                 Votre commentaire a bien été ajouté
             </div>
         {{/if}}
-
+        {{#if success}}
+            <div class="alert alert-success ">
+                Votre publication a bien été ajoutée
+            </div>
+        {{/if}}
+        {{#if error}}
+            <div class="alert alert-danger">
+                Une erreur est survenue lors de l'ajout de votre publication. Veuillez réessayer.
+            </div>
+        {{/if}}
         <section id="sectionCreationPublication" class="hidden flex flex-col post p-8 rounded-xl w-fill-available gap-5">
             <h3 class="heading3">Formulaire de création de publication</h3>
             <form action="/creationPublication" method="post" class="flex flex-col gap-5">

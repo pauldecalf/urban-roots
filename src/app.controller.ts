@@ -322,16 +322,29 @@ return this.appService.getInscription();
 
 @Get('/espace-jardinage')
 @Render('espace-jardinage')
-async getEspaceJardinage() {
+async getEspaceJardinage(@Query('error') error: string,@Query('success') success: string,@Req() req, @Res() res: Response) {
+    let user = null;
+    let userId = null;
+    const token = req.cookies?.jwt;
+
+    if (token) {
+        try {
+            user = this.jwtService.verify(token);
+            userId = user.sub;
+        } catch (err) {
+            user = null;
+        }
+    }
+
   const jardins = await this.jardinsService.findAll();
-  return { jardins: JSON.stringify(jardins) };
+  return {success: success === 'true',error: error === 'true',user, jardins: JSON.stringify(jardins) };
 }
 
 
 
     @Get('/espace-communautaire')
     @Render('espace-communautaire')
-    async getEspaceCommunautaire(@Request() req,@Query('tag') tag: string) {
+    async getEspaceCommunautaire(@Query('success') success: string,@Query('error') error: string,@Request() req,@Query('tag') tag: string) {
         let user = null;
         let userId = null;
         const token = req.cookies?.jwt;
@@ -373,7 +386,7 @@ async getEspaceJardinage() {
         );
 
         console.log('publications:', publications);
-        return { user,selectedTag, publications: publicationsWithLikes, successCommentaire };
+        return { success: success === 'true',error: error === 'true',user,selectedTag, publications: publicationsWithLikes, successCommentaire };
     }
 
 
@@ -443,13 +456,44 @@ async getEspaceJardinage() {
                 createdAt: new Date(),
             });
 
-            return res.status(201).json({ publication });
+            // Redirection vers la page espace-jardinage avec succès
+            return res.redirect('/espace-communautaire?success=true');
         } catch (err) {
-            console.error('Erreur lors de la création de la publication:', err);
-            return res.status(400).json({ message: err.message });
+            // Redirection vers la page espace-jardinage avec succès
+            return res.redirect('/espace-communautaire?error=true');
         }
     }
 
 
+    @Post('/creationJardin')
+    async createJardin(@Body() createJardinDto: any, @Req() req, @Res() res: Response) {
+        const token = req.cookies?.jwt;
+
+        if (!token) {
+            return res.status(401).json({ message: 'Utilisateur non authentifié' });
+        }
+
+        try {
+            const user = this.jwtService.verify(token);
+            const userId = user.sub;
+
+            // Requete pour récupérer certaines informations de l'utilisateur, comme l'image
+            const userImg = await this.usersService.findOne(userId);
+
+            // Création du jardin
+            const jardin = await this.jardinsService.create({
+                ...createJardinDto,
+                createdBy: userId,  // Ajout de l'utilisateur créateur
+            });
+
+            // Redirection vers la page espace-jardinage avec succès
+            return res.redirect('/espace-jardinage?success=true');
+
+        } catch (err) {
+            console.error('Erreur lors de la création du jardin:', err);
+            // Redirection vers la page espace-jardinage avec error
+            return res.redirect('/espace-jardinage?error=true');
+        }
+    }
 
 }

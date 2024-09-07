@@ -4176,10 +4176,6 @@ nav div{
   border-radius: .25rem;
 }
 
-.fade.show {
-  opacity: 1;
-}
-
 .alert-dismissible {
   padding-right: 4rem;
 }
@@ -4198,6 +4194,309 @@ nav div{
 .like-btn.liked i {
   color: pink;
   /* Cœur rose pour les publications likées */
+}
+
+/* Styles de base pour la modal */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1050;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  outline: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Couleur de fond pour le backdrop */
+}
+
+.modal-dialog {
+  position: relative;
+  width: auto;
+  margin: 10px;
+  pointer-events: none;
+}
+
+.modal.fade .modal-dialog {
+  transition: transform 0.3s ease-out;
+  transform: translate(0, -25%);
+}
+
+.modal.show .modal-dialog {
+  transform: translate(0, 0);
+}
+
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  outline: 0;
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.modal-title {
+  margin-bottom: 0;
+  line-height: 1.5;
+  font-size: 1.25rem;
+}
+
+.modal-body {
+  position: relative;
+  flex: 1 1 auto;
+  padding: 1rem;
+}
+
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1rem;
+  border-top: 1px solid #dee2e6;
+}
+
+.modal-footer > * {
+  margin-left: .25rem;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 0.5;
+}
+
+.modal-scrollbar-measure {
+  position: absolute;
+  top: -9999px;
+  width: 50px;
+  height: 50px;
+  overflow: scroll;
+}
+
+/* Transition pour l'animation */
+
+.modal.fade .modal-dialog {
+  transition: transform 0.3s ease-out;
+  transform: translate(0, -25%);
+}
+
+.modal.show .modal-dialog {
+  transform: translate(0, 0);
+}
+
+.btn-secondary {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+button, select {
+  text-transform: none;
+}
+
+button, input {
+  overflow: visible;
+}
+
+button, input, optgroup, select, textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+button {
+  border-radius: 0;
+}
+
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
+user agent stylesheet
+button {
+  -webkit-appearance: auto;
+     -moz-appearance: auto;
+          appearance: auto;
+  font-style: ;
+  font-variant-ligatures: ;
+  font-variant-caps: ;
+  font-variant-numeric: ;
+  font-variant-east-asian: ;
+  font-variant-alternates: ;
+  font-variant-position: ;
+  font-weight: ;
+  font-stretch: ;
+  font-size: ;
+  font-family: ;
+  font-optical-sizing: ;
+  font-size-adjust: ;
+  font-kerning: ;
+  font-feature-settings: ;
+  font-variation-settings: ;
+  text-rendering: auto;
+  color: buttontext;
+  letter-spacing: normal;
+  word-spacing: normal;
+  line-height: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: center;
+  align-items: flex-start;
+  cursor: default;
+  box-sizing: border-box;
+  background-color: buttonface;
+  margin: 0em;
+  padding-block: 1px;
+  padding-inline: 6px;
+  border-width: 2px;
+  border-style: outset;
+  border-color: buttonborder;
+  -o-border-image: initial;
+     border-image: initial;
+}
+
+.btn:not(:disabled):not(.disabled) {
+  cursor: pointer;
+}
+
+.modal-footer>:not(:first-child) {
+  margin-left: .25rem;
+}
+
+[type=reset], [type=submit], button, html [type=button] {
+  -webkit-appearance: button;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+button, select {
+  text-transform: none;
+}
+
+button, input {
+  overflow: visible;
+}
+
+button, input, optgroup, select, textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+button {
+  border-radius: 0;
+}
+
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
+user agent stylesheet
+button {
+  -webkit-appearance: auto;
+     -moz-appearance: auto;
+          appearance: auto;
+  font-style: ;
+  font-variant-ligatures: ;
+  font-variant-caps: ;
+  font-variant-numeric: ;
+  font-variant-east-asian: ;
+  font-variant-alternates: ;
+  font-variant-position: ;
+  font-weight: ;
+  font-stretch: ;
+  font-size: ;
+  font-family: ;
+  font-optical-sizing: ;
+  font-size-adjust: ;
+  font-kerning: ;
+  font-feature-settings: ;
+  font-variation-settings: ;
+  text-rendering: auto;
+  color: buttontext;
+  letter-spacing: normal;
+  word-spacing: normal;
+  line-height: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: center;
+  align-items: flex-start;
+  cursor: default;
+  box-sizing: border-box;
+  background-color: buttonface;
+  margin: 0em;
+  padding-block: 1px;
+  padding-inline: 6px;
+  border-width: 2px;
+  border-style: outset;
+  border-color: buttonborder;
+  -o-border-image: initial;
+     border-image: initial;
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
 }
 
 /*! tailwindcss v3.4.4 | MIT License | https://tailwindcss.com*/
@@ -4802,6 +5101,11 @@ video {
   margin: 0.75rem;
 }
 
+.mx-10{
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
+}
+
 .mx-4{
   margin-left: 1rem;
   margin-right: 1rem;
@@ -4861,6 +5165,10 @@ video {
 
 .mt-28{
   margin-top: 7rem;
+}
+
+.mt-3{
+  margin-top: 0.75rem;
 }
 
 .mt-32{
@@ -5076,6 +5384,10 @@ video {
 
   .sm\:block{
     display: block;
+  }
+
+  .sm\:flex{
+    display: flex;
   }
 
   .sm\:flex-row{

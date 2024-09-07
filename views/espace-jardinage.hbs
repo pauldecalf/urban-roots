@@ -24,11 +24,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+
 </head>
 
 
 <body>
-<!-- Header -->
 <header id="header" class=" flex fixed top-0 left-0 w-full z-50">
     <div class="header-desktop">
         <a href="/">
@@ -86,7 +88,21 @@
         </div>
     </div>
 
-    <div class=" my-32 mx-4 sm:mx-6 md:mx-auto contact-div">
+
+
+
+    {{#if success}}
+        <div class="alert alert-success my-32 mx-10">
+            Votre jardin a été ajouté avec succès !
+        </div>
+    {{/if}}
+    {{#if error}}
+        <div class="alert alert-danger my-32 mx-10">
+            Une erreur est survenue lors de l'ajout de votre jardin. Veuillez réessayer.
+        </div>
+    {{/if}}
+    <main class="my-32  mx-4 sm:mx-6 md:mx-auto contact-div">
+
         <div>
             <h1 class="contact-h1">
                 A la recherche d'un jardin collaboratif ?<br>
@@ -100,86 +116,106 @@
                 <br>
                 <br>
                 <span class="contact-span">Vous pouvez également ajouter votre propre jardin collaboratif à la carte pour le partager avec la communauté.</span>
-                
 
-                    <a href="/blog" class="cta-lg outline-cta mt-6">
-                    Ajouter mon jardin
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M18 11.9996C17.9951 11.4735 17.7832 10.9705 17.41 10.5996L13.12 6.29958C12.9326 6.11333 12.6792 6.00879 12.415 6.00879C12.1508 6.00879 11.8974 6.11333 11.71 6.29958C11.6163 6.39254 11.5419 6.50315 11.4911 6.62501C11.4403 6.74686 11.4142 6.87757 11.4142 7.00958C11.4142 7.14159 11.4403 7.2723 11.4911 7.39416C11.5419 7.51602 11.6163 7.62662 11.71 7.71958L15 10.9996H5C4.73478 10.9996 4.48043 11.1049 4.29289 11.2925C4.10536 11.48 4 11.7344 4 11.9996C4 12.2648 4.10536 12.5192 4.29289 12.7067C4.48043 12.8942 4.73478 12.9996 5 12.9996H15L11.71 16.2896C11.5217 16.4766 11.4154 16.7307 11.4144 16.996C11.4135 17.2614 11.518 17.5163 11.705 17.7046C11.892 17.8929 12.1461 17.9992 12.4115 18.0001C12.6768 18.0011 12.9317 17.8966 13.12 17.7096L17.41 13.4096C17.7856 13.0362 17.9978 12.5292 18 11.9996Z" fill="#2F2F2F"></path>
-                    </svg>
-                </a>
+
+{{#if user}}
+    <button id="ctaformulaireJardin" type="button" class="cta-lg outline-cta mt-6">
+        Ajouter mon jardin
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M18 11.9996C17.9951 11.4735 17.7832 10.9705 17.41 10.5996L13.12 6.29958C12.9326 6.11333 12.6792 6.00879 12.415 6.00879C12.1508 6.00879 11.8974 6.11333 11.71 6.29958C11.6163 6.39254 11.5419 6.50315 11.4911 6.62501C11.4403 6.74686 11.4142 6.87757 11.4142 7.00958C11.4142 7.14159 11.4403 7.2723 11.4911 7.39416C11.5419 7.51602 11.6163 7.62662 11.71 7.71958L15 10.9996H5C4.73478 10.9996 4.48043 11.1049 4.29289 11.2925C4.10536 11.48 4 11.7344 4 11.9996C4 12.2648 4.10536 12.5192 4.29289 12.7067C4.48043 12.8942 4.73478 12.9996 5 12.9996H15L11.71 16.2896C11.5217 16.4766 11.4154 16.7307 11.4144 16.996C11.4135 17.2614 11.518 17.5163 11.705 17.7046C11.892 17.8929 12.1461 17.9992 12.4115 18.0001C12.6768 18.0011 12.9317 17.8966 13.12 17.7096L17.41 13.4096C17.7856 13.0362 17.9978 12.5292 18 11.9996Z" fill="#2F2F2F"></path>
+        </svg>
+    </button>
+{{else}}
+    <a href="/login" type="button" class="cta-lg outline-cta mt-6">
+        Ajouter mon jardin
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M18 11.9996C17.9951 11.4735 17.7832 10.9705 17.41 10.5996L13.12 6.29958C12.9326 6.11333 12.6792 6.00879 12.415 6.00879C12.1508 6.00879 11.8974 6.11333 11.71 6.29958C11.6163 6.39254 11.5419 6.50315 11.4911 6.62501C11.4403 6.74686 11.4142 6.87757 11.4142 7.00958C11.4142 7.14159 11.4403 7.2723 11.4911 7.39416C11.5419 7.51602 11.6163 7.62662 11.71 7.71958L15 10.9996H5C4.73478 10.9996 4.48043 11.1049 4.29289 11.2925C4.10536 11.48 4 11.7344 4 11.9996C4 12.2648 4.10536 12.5192 4.29289 12.7067C4.48043 12.8942 4.73478 12.9996 5 12.9996H15L11.71 16.2896C11.5217 16.4766 11.4154 16.7307 11.4144 16.996C11.4135 17.2614 11.518 17.5163 11.705 17.7046C11.892 17.8929 12.1461 17.9992 12.4115 18.0001C12.6768 18.0011 12.9317 17.8966 13.12 17.7096L17.41 13.4096C17.7856 13.0362 17.9978 12.5292 18 11.9996Z" fill="#2F2F2F"></path>
+        </svg>
+    </a>
+{{/if}}
 
             </p>
 
         </div>
+        <form method="post" action="/creationJardin" id="formulaireJardin" class="hidden flex flex-col post p-8 rounded-xl w-fill-available gap-5">
+            <h2 class="heading3">Formulaire de création de jardin</h2>
+            <label class="sm:flex flex-col gap-3 mt-3">
+                <p>Nom de votre jardin :</p>
+                <input required name="nom" type="text" placeholder="Nom" class="input-create-post w-full p-2 border border-gray-300 rounded-lg">
+            </label>
+            <label class="sm:flex flex-col gap-3 mt-3">
+                <p>Description :</p>
+                <input required name="description" type="text" placeholder="Description" class="input-create-post w-full p-2 border border-gray-300 rounded-lg">
+            </label>
+            <div class="sm:flex gap-3 mt-3">
+                <label class="sm:flex flex-col gap-3 mt-3">
+                    <p>Adresse du jardin :</p>
+                    <input required name="adresse" type="text" placeholder="Adresse du jardin" class="input-create-post w-full p-2 border border-gray-300 rounded-lg">
+                </label>
+                <label class="sm:flex flex-col gap-3 mt-3">
+                    <p>Ville :</p>
+                    <input required name="ville" type="text" placeholder="Ville" class="input-create-post w-full p-2 border border-gray-300 rounded-lg">
+                </label>
+                <label class="sm:flex flex-col gap-3 mt-3">
+                    <p>Code postal :</p>
+                    <input required name="codePostal" type="number" placeholder="Code postal" class="input-create-post w-full p-2 border border-gray-300 rounded-lg">
+                </label>
+            </div>
+            <div class="sm:flex gap-3 mt-3">
+                <label class="sm:flex flex-col gap-3 mt-3">
+                    <p>Site web :</p>
+                    <input required name="siteWeb" type="url" placeholder="siteweb" class="input-create-post w-full p-2 border border-gray-300 rounded-lg">
+                </label>
+                <label class="sm:flex flex-col gap-3 mt-3">
+                    <p>Image du jardin : (URL)</p>
+                    <input required name="image" type="text" placeholder="URL de votre image" class="input-create-post w-full p-2 border border-gray-300 rounded-lg">
+                </label>
+            </div>
+            <div class="sm:flex gap-3">
+                <label class="flex flex-col gap-3 mt-3">
+                    <p>Horaire :</p>
+                    <input required name="horaires" type="text" placeholder="Horaires" class="input-create-post w-full p-2 border border-gray-300 rounded-lg">
+                </label>
+                <label class="sm:flex flex-col gap-3 mt-3">
+                    <p>Type :</p>
+                    <select required name="type" class="input-create-post w-full p-2 border border-gray-300 rounded-lg">
+                        <option value="potager">Potager</option>
+                        <option value="verger">Verger</option>
+                        <option value="jardin partagé">Jardin partagé</option>
+                        <option value="jardin collectif">Jardin collectif</option>
+                    </select>
+                </label>
+                <label class="sm:flex flex-col gap-3 mt-3">
+                    <p>Public :</p>
+                    <select required name="public" class="input-create-post w-full p-2 border border-gray-300 rounded-lg">
+                        <option value="enfant">Enfant</option>
+                        <option value="adulte">Adulte</option>
+                        <option value="famille">Famille</option>
+                        <option value="senior">Senior</option>
+                        <option value="tous public">Tous publics</option>
+                        <option value="Sur inscription">Sur inscription</option>
+                    </select>
+                </label>
+            </div>
+            <div class="sm:flex gap-3">
+                <label class="sm:flex flex-col gap-3 mt-3">
+                    <p>Longitude :</p>
+                    <input required name="longitude" type="number" placeholder="Longitude" class="input-create-post w-full p-2 border border-gray-300 rounded-lg">
+                </label>
+                <label class="sm:flex flex-col gap-3 mt-3">
+                    <p>Latitude :</p>
+                    <input required name="latitude" type="number" placeholder="Latitude" class="input-create-post w-full p-2 border border-gray-300 rounded-lg">
+                </label>
+            </div>
+            <button id="ctaformulaireJardin" type="submit" class="cta-lg outline-cta mt-6">
+                Créer mon jardin
+            </button>
+        </form>
         <div id="map" style="width:100%; height:400px;z-index:1;"></div>
 
-        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
-        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
-  
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-        const map = L.map('map').setView([48.8566, 2.3522], 6);
+        <textarea id="jardinsData" style="display:none;">{{{jardins}}}</textarea>
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
-
-        // Insérer les données des jardins dans le script en tant que chaîne JSON
-        const jardinsData = `{{{jardins}}}`;  // Utilisation des triples accolades pour éviter l'échappement
-        const jardins = JSON.parse(jardinsData);  // Utilisation de JSON.parse pour convertir la chaîne en objet
-
-        // Créer un groupe de clusters
-        const markers = L.markerClusterGroup();
-
-        jardins.forEach(jardin => {
-            // Vérifiez que lat et lng sont définis avant de créer le marqueur
-            if (typeof jardin.latitude === 'number' && typeof jardin.longitude === 'number') {
-            const marker = L.marker([jardin.latitude, jardin.longitude])
-                .bindPopup(`
-                <b>${jardin.nom}</b><br>
-                ${jardin.adresse}, ${jardin.codePostal} ${jardin.ville}<br>
-                <a href="${jardin.siteWeb}" target="_blank">Voir le site</a><br>
-                <img src="${jardin.image}" alt="${jardin.nom}" style="width:100px;height:auto;"><br>
-                ${jardin.description}<br>
-                <b>Horaires :</b> ${jardin.horaires}<br>
-                <b>Type :</b> ${jardin.type}<br>
-                <b>Public :</b> ${jardin.public}<br>
-                <b>Note :</b> ${jardin.note}<br>
-                <b>Avis :</b> ${jardin.avis}<br>
-                `);
-
-            markers.addLayer(marker);  // Ajouter le marqueur au groupe de clusters
-            } else {
-            console.error('Invalid LatLng for jardin:', jardin);
-            }
-        });
-
-        map.addLayer(markers);  // Ajouter le groupe de clusters à la carte
-
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((position) => {
-            const userLat = position.coords.latitude;
-            const userLng = position.coords.longitude;
-
-            map.setView([userLat, userLng], 13);
-
-            L.marker([userLat, userLng]).addTo(map)
-                .bindPopup('Vous êtes ici')
-                .openPopup();
-            }, (error) => {
-            console.error('Erreur lors de la récupération de la position de l\'utilisateur :', error);
-            });
-        } else {
-            console.error('La géolocalisation n\'est pas supportée par ce navigateur.');
-        }
-        });
-    </script>
-    </div>
+    </main>
 
     <!-- Banniere des cookies -->
     <div id="cookie-banner" class="cookie-banner">
@@ -237,6 +273,21 @@
 
     </div>
 </footer>
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!-- Leaflet et MarkerCluster -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+
+<!-- Votre script -->
+<script src="../espace-jardinage.js"></script>
+
 <script src="../script.js"></script>
+
+
 </body>
 </html>

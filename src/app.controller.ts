@@ -9,7 +9,7 @@ import {
     Req,
     Query,
     Render,
-    Res, UseInterceptors, UploadedFile
+    Res, UseInterceptors, UploadedFile, Delete
 } from '@nestjs/common';
 import { Response } from 'express';
 import { AppService } from './app.service';
@@ -384,6 +384,25 @@ async getEspaceJardinage() {
         }
     }
 
+    @Delete('/LikePublication/:publicationId')
+    async unlikePublication(@Param('publicationId') publicationId: string, @Req() req, @Res() res: Response) {
+        const token = req.cookies?.jwt;
+
+        if (!token) {
+            return res.status(401).json({ message: 'Utilisateur non authentifié' });
+        }
+
+        try {
+            const user = this.jwtService.verify(token);
+            const userId = user.sub;
+
+            await this.likePublicationService.unlikePublication(publicationId, userId);
+            return res.status(200).json({ message: 'Publication unlikée avec succès' });
+        } catch (err) {
+            console.error('Erreur lors du unlike:', err);
+            return res.status(400).json({ message: err.message });
+        }
+    }
 
 
 

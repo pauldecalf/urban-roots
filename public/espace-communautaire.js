@@ -6,13 +6,21 @@ document.addEventListener('DOMContentLoaded', () => {
 let init = () => {
     ajouterReponseDiv();
     ajouterReponseRequest();
+
+    // Ajoutez la classe 'liked' aux boutons déjà likés au chargement de la page
+    document.querySelectorAll('.like-btn').forEach(button => {
+        const isLiked = button.getAttribute('data-publication-liked') === 'true'; // Vérifie si la publication est déjà likée
+        if (isLiked) {
+            button.classList.add('liked'); // Ajoute la classe 'liked' au bouton
+            const heartIcon = button.querySelector('i');
+            heartIcon.style.color = 'red'; // Change la couleur de l'icône pour les publications déjà likées
+        }
+    });
 }
 
 let ajouterReponseDiv = () => {
-    // Sélectionne tous les boutons avec la classe 'ajouter-une-reponse'
     document.querySelectorAll('.ajouter-une-reponse').forEach(button => {
         button.addEventListener('click', function () {
-            // Sélectionne le formulaire de réponse associé au bouton cliqué
             const reponseDiv = this.closest('.post').querySelector('.reponseDiv');
             if (reponseDiv.classList.contains('hidden')) {
                 reponseDiv.classList.remove('hidden');
@@ -28,7 +36,7 @@ let ajouterReponseDiv = () => {
 let ajouterReponseRequest = () => {
     document.querySelectorAll('.like-btn').forEach(button => {
         button.addEventListener('click', async () => {
-            const publicationId = button.getAttribute('data-publication-id'); // Récupère l'ID de la publication
+            const publicationId = button.getAttribute('data-publication-id');
 
             if (!publicationId) {
                 console.error('ID de publication manquant');
@@ -36,7 +44,7 @@ let ajouterReponseRequest = () => {
             }
 
             try {
-                const isLiked = button.classList.contains('liked'); // Vérifie si le bouton a déjà la classe 'liked'
+                const isLiked = button.classList.contains('liked');
                 let response;
 
                 if (isLiked) {
@@ -58,11 +66,9 @@ let ajouterReponseRequest = () => {
                 }
 
                 if (response.ok) {
-                    // On retire l'icon pour mettre <img src="img/icons8-love-48.png" height="20px" width="20px" alt="Icon indicating that the publication is liked">\n' +
-
-
                     const heartIcon = button.querySelector('i');
-                    heartIcon.style.color = isLiked ? 'black' : 'red'; // Change la couleur de l'icône en fonction de l'action effectuée
+                    button.classList.toggle('liked');
+                    heartIcon.style.color = isLiked ? 'black' : 'red';
                 } else {
                     console.error('Erreur lors de la requête:', response.statusText);
                 }
@@ -72,4 +78,3 @@ let ajouterReponseRequest = () => {
         });
     });
 };
-

@@ -130,30 +130,30 @@
             <button id="ctaAgriculture" type="button" class="p-3 flex gap-5 rounded-lg fit-content cta-tendance">
                 <div class="flex flex-col items-start">
                     <p class="text-base font-bold">Agriculture</p>
-                    <p class="text-sm">20/07/2024 - 17:38</p>
+                    <p class="text-sm">{{ formatDate dateLastPublicationAgriculture }}</p>
                 </div>
-                <span class="text-sm font-bold  cta-column-left-topic rounded-xl p-4">2</span>
+                <span class="text-sm font-bold  cta-column-left-topic rounded-xl p-4">{{ lenghtAgriculture }}</span>
             </button>
             <button id="ctaRessources" type="button" class="p-3 flex gap-5 rounded-lg fit-content cta-tendance">
                 <div class="flex flex-col items-start">
                     <p class="text-base font-bold">Ressources</p>
-                    <p class="text-sm">01/07/2024 - 21:47</p>
+                    <p class="text-sm">{{ formatDate dateLastPublicationsRessources }}</p>
                 </div>
-                <span class="text-sm font-bold  cta-column-left-topic rounded-xl p-4">49</span>
+                <span class="text-sm font-bold  cta-column-left-topic rounded-xl p-4">{{ lenghtRessources }}</span>
             </button>
             <button id="ctaJardinage" type="button" class="p-3 flex gap-5 rounded-lg fit-content cta-tendance">
                 <div class="flex flex-col items-start">
                     <p class="text-base font-bold">Jardinage</p>
-                    <p class="text-sm">09/07/2024 - 21:47</p>
+                    <p class="text-sm">{{ formatDate dateLastPublicationsJardinage }}</p>
                 </div>
-                <span class="text-sm font-bold  cta-column-left-topic rounded-xl p-4">49</span>
+                <span class="text-sm font-bold  cta-column-left-topic rounded-xl p-4">{{ lenghtJardinage }}</span>
             </button>
             <button id="ctaAll" type="button" class="p-3 flex gap-5 rounded-lg fit-content cta-tendance">
                 <div class="flex flex-col items-start">
                     <p class="text-base font-bold">Tous les sujets</p>
-                    <p class="text-sm">02/08/2024 - 17:38</p>
+                    <p class="text-sm">{{ formatDate dateLastPublicationsAll }}</p>
                 </div>
-                <span class="text-sm font-bold  cta-column-left-topic rounded-xl p-4">100</span>
+                <span class="text-sm font-bold  cta-column-left-topic rounded-xl p-4">{{ lenghtAll }}</span>
             </button>
         </div>
     </div>

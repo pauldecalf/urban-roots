@@ -5427,10 +5427,6 @@ video {
 }
 
 @media (min-width: 494px){
-  .xs\:m-12{
-    margin: 3rem;
-  }
-
   .xs\:block{
     display: block;
   }

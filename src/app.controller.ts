@@ -512,17 +512,42 @@ async getEspaceJardinage(@Query('error') error: string,@Query('success') success
 // Récupérez le tag de l'URL, s'il existe
         let selectedTag = tag;  // Par défaut, 'all' si aucun tag n'est fourni
         let publications = []
-        // On récupére le parametre tag de l'url si il y a en a un
-        console.log('tag :', selectedTag);
+        // On met la première lettre en majuscule
         if(selectedTag){
+                selectedTag = selectedTag.charAt(0).toUpperCase() + selectedTag.slice(1);
              publications = await this.publicationsService.findAllWithTags([selectedTag]);
         } else {
              publications = await this.publicationsService.findAll();
         }
 
-        if (selectedTag == "mesPosts") {
+        if (selectedTag == "MesPosts") {
             publications = await this.publicationsService.findAllWithIdUser(userId);
         }
+
+        // count par tags
+        let publicationsAgriculture = await this.publicationsService.findAllWithTags(["Agriculture"]);
+        // Get date of the last publication with the tag "Agriculture"
+        let lastPublicationAgriculture = publicationsAgriculture[publicationsAgriculture.length - 1];
+        // Get date of the last publication with the tag "Agriculture"
+
+
+        let publicationsRessources = await this.publicationsService.findAllWithTags(["Ressources"]);
+        // Get date of the last publication with the tag "Ressources"
+        let lastPublicationsRessources = publicationsRessources[publicationsRessources.length - 1];
+        // Get date of the last publication with the tag "Agriculture"
+
+
+        let publicationsJardinage = await this.publicationsService.findAllWithTags(["Jardinage"]);
+        // Get date of the last publication with the tag "Jardinage"
+        let lastPublicationsJardinage = publicationsJardinage[publicationsJardinage.length - 1];
+        // Get date of the last publication with the tag "Agriculture"
+
+        let publicationsAll = await this.publicationsService.findAll();
+        // Get date of the last publication with the tag "Agriculture"
+        let lastPublicationsAll = publicationsAll[publicationsAll.length - 1];
+        // Get date of the last publication with the tag "Agriculture"
+
+
 
         // Ajouter si l'utilisateur a liké chaque publication
         const publicationsWithLikes = await Promise.all(
@@ -534,8 +559,14 @@ async getEspaceJardinage(@Query('error') error: string,@Query('success') success
             })
         );
 
+
         console.log('publications:', publications);
-        return { success: success === 'true',error: error === 'true',user,selectedTag, publications: publicationsWithLikes, successCommentaire };
+        return {
+            dateLastPublicationAgriculture: lastPublicationAgriculture ? lastPublicationAgriculture.createdAt : null,
+            dateLastPublicationsRessources: lastPublicationsRessources ? lastPublicationsRessources.createdAt : null,
+            dateLastPublicationsJardinage: lastPublicationsJardinage ? lastPublicationsJardinage.createdAt : null,
+            dateLastPublicationsAll: lastPublicationsAll ? lastPublicationsAll.createdAt : null,
+            lenghtAll: publicationsAll.length, lenghtAgriculture: publicationsAgriculture.length, lenghtRessources: publicationsRessources.length, lenghtJardinage: publicationsJardinage.length,   success: success === 'true',error: error === 'true',user,selectedTag, publications: publicationsWithLikes, successCommentaire };
     }
 
 
